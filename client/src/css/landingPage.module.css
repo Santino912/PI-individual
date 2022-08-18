@@ -1,0 +1,62 @@
+.divBase{
+    content: "";
+    background-color: var(--principal-color);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+
+}
+.divBase::before{
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    background-image: url("https://d3544la1u8djza.cloudfront.net/APHI/Blog/2020/11-19/shiba+dog+resting+with+head+between+paws-min.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.6;
+}
+
+.titleButton{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+
+}
+.containerLandingPage{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.title{
+    font-size: 100px;
+    color: white;
+    background-color: black;
+    padding: 10px;
+    border-radius: 10px;
+
+}
+.button{
+    border-radius: 13px;
+    font-size: 40px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(236, 237, 255);
+    cursor:pointer;
+    padding: 20px;
+}
+.button:hover{
+    transition: 1s;
+    background-color: var(--principal-color);
+}
