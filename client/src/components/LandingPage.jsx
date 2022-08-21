@@ -1,8 +1,11 @@
-import React from 'react'
+import React  from 'react'
 import style from "../css/landingPage.module.css"
 import {Link} from "react-router-dom"
 
+
 const LandingPage = () => {
+
+  
   return (
     <div style={{position: "fixed", width: "100%", height: "100%"}}>
         <div className={style.titleButton}>
@@ -10,7 +13,7 @@ const LandingPage = () => {
         <h1 className={style.title}>DogsApi</h1>
         </div>
         <div className={style.containerLandingPage}>
-        <Link style={{textDecoration:"none"}} to="/home"><h1 className={style.button}>Home</h1></Link>
+        <Link to="/home"><h1 className={style.button}>Home</h1></Link>
         </div>
         </div>
         <div className={style.divBase} />

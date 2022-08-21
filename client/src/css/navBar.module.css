@@ -10,6 +10,7 @@
     background-color: var(--principal-color);
     color: white;
     z-index: 2;
+    padding: 5px;
 }
 .selectsDivs{
     width: 25%;

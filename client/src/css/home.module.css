@@ -5,9 +5,25 @@
     text-decoration: none;
     list-style: none;
   }
+
 .divHome{
-    height: 100%;
-    width: 100%;
-    padding-top: 10px;
-    background-color: rgb(126, 126, 247);
+  height: 100%;
+  width: 100%;
+  background-color: rgb(0, 0, 0);
+  padding-top: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.divCards{
+  height:100%;
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  background-color: black;
+  padding: 80px 0;
 }

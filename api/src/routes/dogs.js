@@ -1,20 +1,21 @@
 const { Router } = require("express");
 const { Op } = require("sequelize");
-const { Breed } = require("../db");
+const { Breeds, Dogs } = require("../db");
 const router = Router();
 const { dogsApiFetch } = require("../utils/addData");
-dogsApiFetch();
+
+//dogsApiFetch();
 
 router.get("/", async (req, res) => {
   const { name } = req.query;
   let breedFinded;
   try {
     if (!name) {
-      breedFinded = await Breed.findAll();
+      breedFinded = await Breeds.findAll();
       return res.json(breedFinded);
     }
     if (name) {
-      breedFinded = await Breed.findAll({
+      breedFinded = await Breeds.findAll({
         where: {
           breedGroup: { [Op.iLike]: name },
         },
@@ -29,7 +30,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    breedFinded = await Breed.findOne({
+    breedFinded = await Breeds.findOne({
       where: {
         id: { [Op.eq]: id },
       },
@@ -37,6 +38,17 @@ router.get("/:id", async (req, res) => {
     return res.json(breedFinded);
   } catch (err) {
     res.json(err);
+  }
+});
+
+router.post("/", async (req, res) => {
+  const { name, weight, height, lifeSpan } = req.body;
+  try {
+    await Dogs.create({
+      name,
+    });
+  } catch (err) {
+    res.status(404).send(err);
   }
 });
 

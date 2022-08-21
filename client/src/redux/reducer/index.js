@@ -1,4 +1,4 @@
-import { FETCH_ALL_BREEDS, FETCH_ONE_BREED } from "../actions/actions";
+import { FETCH_ALL_BREEDS, FETCH_ONE_BREED } from "../actions";
 
 let initialState = {
   breedArr: [],
@@ -6,7 +6,6 @@ let initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  console.log(action.payload);
   switch (action.type) {
     case FETCH_ALL_BREEDS:
       return {

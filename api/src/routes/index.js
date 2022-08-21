@@ -1,6 +1,5 @@
 const { Router } = require("express");
-const { Breed } = require("../db");
-
+const temperaments = require("./temperaments");
 const dogs = require("./dogs");
 const express = require("express");
 
@@ -12,6 +11,7 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 router.use(express.json());
 
+router.use("/temperaments", temperaments);
 router.use("/dogs", dogs);
 router.get("/", (req, res) => {});
 

@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define("Breed", {
+  sequelize.define("Breeds", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
