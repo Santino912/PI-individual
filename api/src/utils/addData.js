@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { Breeds, Temperaments } = require("../db.js");
+const { Temperaments } = require("../db.js");
 function stringToArr(arr) {
   return typeof arr == "string" ? arr.split(", ") : false;
 }
@@ -11,16 +11,7 @@ module.exports = {
       .then((data) => data);
 
     dogsFinded.data.map(async (breed) => {
-      let { name, life_span, bred_for, breed_group, temperament } = breed;
-      let breedsCreated = await Breeds.create({
-        name,
-        lifeSpan: life_span,
-        weight: breed.weight.imperial,
-        height: breed.height.imperial,
-        breedFor: bred_for,
-        breedGroup: breed_group,
-      });
-
+      let { temperament } = breed;
       let arr = stringToArr(temperament);
       if (Array.isArray(arr)) {
         arr.map(async (name) => {
@@ -29,7 +20,6 @@ module.exports = {
               name,
             },
           });
-          await breedsCreated.addTemperament(row, { name });
         });
       }
     });

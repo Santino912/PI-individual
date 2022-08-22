@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { allBreeds } from "../redux/actions"
 
 const Home = () => {
-  let dispatch = useDispatch()
   const state = useSelector(state => state.breedArr)
-useEffect(() => {
+  let dispatch = useDispatch()
+  useEffect(() => {
 dispatch(allBreeds())
-}, [])
+}, [dispatch])
   let arr = state.slice(0, 9)
 
   return (
