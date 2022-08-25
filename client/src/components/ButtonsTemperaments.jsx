@@ -4,7 +4,6 @@ import { deleteTemperament } from '../redux/actions'
 
 export const ButtonsTemperaments = ({temperament}) => {
   const dispatch = useDispatch()
-  console.log(temperament)
   return (
     <div>
         <h5 style={{color: "white", margin: "10px"}}>{temperament}</h5>

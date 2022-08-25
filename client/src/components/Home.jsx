@@ -2,36 +2,39 @@ import React, { useEffect, useState } from 'react'
 import style from "../css/home.module.css"
 import CardsDogs from './CardsDogs'
 import { useDispatch, useSelector } from 'react-redux'
-import { allBreeds, changePage, fetchTemperaments, addFilterTemperaments } from "../redux/actions"
+import { allBreeds, fetchTemperaments, addFilterTemperaments } from "../redux/actions"
 import { cutArr, filterAll } from '../utils'
 import Temps from './Temps'
 import { Loading } from './Loading'
 import { ButtonsTemperaments } from './ButtonsTemperaments'
 
 
+
 const Home = () => {
   const [loading, setLoading] = useState(false)
-  
+  const [arr, setArr] = useState([])
+  const [check, setCheck] = useState([])
+  const [index, setIndex] = useState(0)
+
+ 
   let dispatch = useDispatch()
   const stateBreeds = useSelector(state => state.breedArr)
   const stateFilter = useSelector(state => state.strFilter)
-  const index = useSelector(state => state.indexPage)
   const filterTemperaments = useSelector(state => state.filterTemperaments)
   const allTemperaments = useSelector(state => state.allTemperaments)
 
   useEffect(() => {
     setLoading(true)
-    dispatch(allBreeds())
-    dispatch(fetchTemperaments())
+    dispatch(allBreeds(), fetchTemperaments())
+    setCheck(stateBreeds.filter((dog) => filterAll(stateFilter.reg, dog.name, filterTemperaments, dog.temperament)))
+    setArr(cutArr(check, index))
     setLoading(false)
   }, [dispatch])
-  
-  /* 
-  USEEFFECT CADA VEZ QUE SE CAMBIEN LOS FILTROS
-  SETSTATE()
-  */
-  let check  = stateBreeds.filter((dog) => filterAll(stateFilter.reg, dog.name, filterTemperaments, dog.temperament))
-   let arr = cutArr(check, index)
+ 
+  const handleIndex = (i) =>{
+    setIndex(i)
+  }
+
   return (
     <div className={style.divHome}>
       {loading && <Loading />}
@@ -60,9 +63,9 @@ const Home = () => {
       </div>
       <div style={{width: "100%", heigth: "300px", padding:"30px"}} >
       {cutArr(check, index-1).length > 0 && 
-      <button className={style.button} onClick={() => dispatch(changePage(index-1))}>Previous page</button>}
+      <button className={style.button} onClick={() => handleIndex(index-1)}>Previous page</button>}
       {cutArr(check, index+1).length > 0 && 
-      <button className={style.button} onClick={() => dispatch(changePage(index+1))}>Next page</button>}
+      <button className={style.button} onClick={() => handleIndex(index+1)}>Next page</button>}
       </div>
     </div>
   )
