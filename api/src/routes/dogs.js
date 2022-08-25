@@ -8,6 +8,7 @@ const axios = require("axios");
 //dogsApiFetch();
 
 router.get("/", async (req, res) => {
+  const { name } = req.query;
   try {
     let breedsFetched = await axios
       .get("https://api.thedogapi.com/v1/breeds")
@@ -41,7 +42,13 @@ router.get("/", async (req, res) => {
       breedsInData.length < 1
         ? breedsFetched
         : breedsInData.concat(breedsFetched);
-    return res.json(concat);
+    if (name) {
+      let regex = new RegExp(`${name}`, "i");
+      let final = concat.filter((act) => regex.test(act.breed_group));
+      return res.json(final);
+    } else {
+      return res.json(concat);
+    }
   } catch (err) {
     return res.status(404).send(err);
   }
