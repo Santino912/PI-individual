@@ -45,6 +45,9 @@ router.get("/", async (req, res) => {
     if (name) {
       let regex = new RegExp(`${name}`, "i");
       let final = concat.filter((act) => regex.test(act.breed_group));
+      if (final.length < 1) {
+        return res.json(["Dogs can´t found"]);
+      }
       return res.json(final);
     } else {
       return res.json(concat);

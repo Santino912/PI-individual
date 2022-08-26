@@ -1,3 +1,4 @@
+import { breedsGroupsFilter } from "../../utils";
 import {
   CHANGE_PAGE,
   FETCH_ALL_BREEDS,
@@ -5,7 +6,6 @@ import {
   FILTER_NAME,
   RESET_PAGE,
   FILTER_TEMPERAMENTS,
-  FETCH_TEMPERAMENTS,
   RESET_ALL,
   DELETE_TEMPERAMENTS,
 } from "../actions";
@@ -25,6 +25,7 @@ let initialState = {
   indexPage: 0,
   filterTemperaments: [],
   allTemperaments: [],
+  breedsGroups: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -32,7 +33,9 @@ const reducer = (state = initialState, action) => {
     case FETCH_ALL_BREEDS:
       return {
         ...state,
-        breedArr: action.payload,
+        breedArr: action.payload.data,
+        allTemperaments: action.payload.dataTemperaments,
+        breedsGroups: breedsGroupsFilter(action.payload.data),
       };
     case FETCH_ONE_BREED:
       return {
@@ -58,11 +61,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         filterTemperaments: [action.payload, ...state.filterTemperaments],
-      };
-    case FETCH_TEMPERAMENTS:
-      return {
-        ...state,
-        allTemperaments: action.payload,
       };
     case RESET_ALL:
       return {

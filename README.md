@@ -128,10 +128,10 @@ Se debe desarrollar una aplicación de React/Redux que contenga las siguientes p
 
 **Ruta de detalle de raza de perro**: debe contener
 
-- [x] Los campos mostrados en la ruta principal para cada raza (imagen, nombre y temperamento)
-- [x] Altura
-- [x] Peso
-- [x] Años de vida
+- [] Los campos mostrados en la ruta principal para cada raza (imagen, nombre y temperamento)
+- [] Altura
+- [] Peso
+- [] Años de vida
 
 **Ruta de creación de raza de perro**: debe contener
 

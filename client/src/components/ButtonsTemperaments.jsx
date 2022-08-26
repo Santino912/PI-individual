@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { deleteTemperament } from '../redux/actions'
 
-export const ButtonsTemperaments = ({temperament}) => {
+const ButtonsTemperaments = ({temperament}) => {
   const dispatch = useDispatch()
   return (
     <div>
@@ -11,3 +11,4 @@ export const ButtonsTemperaments = ({temperament}) => {
     </div>
   )
 }
+export default ButtonsTemperaments

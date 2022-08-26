@@ -7,24 +7,24 @@ export const FILTER_NAME = "FILTER_NAME";
 export const CHANGE_PAGE = "CHANGE_PAGE";
 export const RESET_PAGE = "RESET_PAGE";
 export const FILTER_TEMPERAMENTS = "FILTER_TEMPERAMENTS";
-export const FETCH_TEMPERAMENTS = "FETCH_TEMPERAMENTS";
 export const RESET_ALL = "RESET_ALL";
 export const SELECT_PUSH = "SELECT_PUSH";
 export const DELETE_TEMPERAMENTS = "DELETE_TEMPERAMENTS";
 
 export function allBreeds() {
+  let dataTemperaments;
+  fetch("http://localhost:3001/temperaments")
+    .then((res) => res.json())
+    .then((data) => (dataTemperaments = data));
   return function (dispatch) {
     return fetch("http://localhost:3001/dogs")
       .then((res) => res.json())
-      .then((data) => dispatch({ type: FETCH_ALL_BREEDS, payload: data }));
-  };
-}
-
-export function fetchTemperaments() {
-  return function (dispatch) {
-    return fetch("http://localhost:3001/temperaments")
-      .then((res) => res.json())
-      .then((data) => dispatch({ type: FETCH_TEMPERAMENTS, payload: data }));
+      .then((data) =>
+        dispatch({
+          type: FETCH_ALL_BREEDS,
+          payload: { data, dataTemperaments },
+        })
+      );
   };
 }
 
@@ -59,8 +59,4 @@ export function resetAll() {
 
 export function deleteTemperament(payload) {
   return { type: DELETE_TEMPERAMENTS, payload };
-}
-
-export function addBreed(data) {
-  return {};
 }
