@@ -93,19 +93,10 @@ router.post("/", async (req, res) => {
     img,
   } = req.body;
   if (!id || !name || !weight || !height || !temperament || !img) {
-    return res.send({
-      id,
-      name,
-      weight,
-      height,
-      temperament,
-      life_span,
-      breed_group,
-      bred_for,
-    });
+    return res.send({ msg: "faltan datos" });
   }
   try {
-    let breed = await breed.create({
+    let breed = await Breeds.create({
       id,
       name,
       weight,
@@ -116,6 +107,7 @@ router.post("/", async (req, res) => {
       bred_for,
       img,
     });
+    console.log(breed);
   } catch (err) {
     res.status(404).send(err);
   }

@@ -1,16 +1,18 @@
 import React from 'react'
 import style from "../css/cardsDogs.module.css"
 import {Link} from "react-router-dom"
-
+import { fetchOneDetail } from '../redux/actions'
+import { useDispatch } from 'react-redux'
 
 const CardsDogs = ({dog}) => {
-
+const dispatch = useDispatch()
   return (
     <div className={style.containCards}>
-      <Link to={`/dogs/${dog.id}`}>
+      <Link onClick={() => dispatch(fetchOneDetail(dog.id))} to={`/dogs/${dog.id}`}>
       <h2 style={{padding: "20px", color: "black"}}>{dog.name}</h2>
       <img className={style.imgCard} src={dog.img} alt={dog.id} />
       </Link>
+
       <div className=''>
       <h4>Life span: {dog.life_span}</h4>
       {dog.temperament && <h4>Temperaments: {dog.temperament}</h4>}

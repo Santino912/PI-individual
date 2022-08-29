@@ -28,7 +28,7 @@ export function allBreeds() {
   };
 }
 
-export function oneBreed(breedId) {
+export function fetchOneDetail(breedId) {
   return function (dispatch) {
     return fetch(`http://localhost:3001/dogs/${breedId}`)
       .then((res) => res.json())

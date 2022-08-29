@@ -4,10 +4,10 @@ import CardsDogs from './CardsDogs'
 import { useDispatch, useSelector } from 'react-redux'
 import { allBreeds, addFilterTemperaments } from "../redux/actions"
 import { cutArr, filterAll } from '../utils'
-import Temps from './Temps'
-import { Loading } from './Loading'
-import ButtonsTemperaments  from './ButtonsTemperaments'
-import Breeds from './Breeds'
+import Temps from '../componentsShorts/Temps'
+import { Loading } from '../componentsShorts/Loading'
+import ButtonsTemperaments  from '../componentsShorts/ButtonsTemperaments'
+import Breeds from '../componentsShorts/Breeds'
 
 
 
@@ -39,7 +39,8 @@ const Home = () => {
       <div className={style.optionsFilter}>
         <div className={style.filterBreed} >
         <h4 style={{color: "white"}}>Filter by breed:</h4>
-        <select onClick={() => setIndex(0)} onChange={(e) => setGroup(e.target.value)} style={{width: "100px", height: "20px"}} defaultValue="default" name='group'>
+        <select onClick={() => setIndex(0)} 
+        onChange={(e) => setGroup(e.target.value)} style={{width: "100px", height: "20px"}} defaultValue="default" name='group'>
         <option style={{width: "10px", height: "40px"}} value="">None</option>
         {allBreedsGroups.map((breed, i) => <Breeds key={i} breed={breed} />)}
         </select>
@@ -47,14 +48,10 @@ const Home = () => {
 
         <div className={style.filterTemperaments}>
         <h4 style={{color: "white"}}>Filter temperament by:</h4>
-        <select onClick={() => setIndex(0)} style={{width: "100px", height: "20px"}} defaultValue="default" onChange={(e) => dispatch(addFilterTemperaments(e.target.value)) } name='temperaments'>
+        <select onClick={() => setIndex(0)} style={{width: "100px", height: "20px"}} defaultValue="default" name='temperaments'>
         <option style={{color: "gray", width: "10px", height: "40px"}} value="default" disabled >Default</option>
         {allTemperaments.map((t, i) => <Temps key={i} temperament={t} />)}
         </select>
-        </div>
-
-        <div className={style.temperamentsDiv}>
-        {filterTemperaments.map((temperament,i ) => <ButtonsTemperaments key={i} temperament={temperament} /> )}
         </div>
       </div>
 
