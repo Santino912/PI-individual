@@ -1,9 +1,10 @@
 const { Router } = require("express");
 const { Op } = require("sequelize");
-const { Breeds, Dogs } = require("../db");
+const { Breeds, Dogs, Temperaments } = require("../db");
 const router = Router();
 const { dogsApiFetch } = require("../utils/addData");
 const axios = require("axios");
+const { stringToArr } = require("../utils/addData");
 
 //dogsApiFetch();
 
@@ -81,33 +82,31 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const {
-    id,
-    name,
-    weight,
-    height,
-    life_span,
-    breed_group,
-    bred_for,
-    temperament,
-    img,
-  } = req.body;
-  if (!id || !name || !weight || !height || !temperament || !img) {
-    return res.send({ msg: "faltan datos" });
-  }
   try {
-    let breed = await Breeds.create({
-      id,
+    const {
       name,
       weight,
       height,
+      life_span,
+      breed_group,
+      bred_for,
       temperament,
+      img,
+    } = req.body;
+    let arrTemperament = stringToArr(temperament);
+    console.log(arrTemperament);
+    let breed = await Breeds.create({
+      name,
+      weight,
+      height,
       life_span,
       breed_group,
       bred_for,
       img,
     });
-    console.log(breed);
+    arrTemperament.map((tem) =>
+      breed.createTemperaments(Temperaments, { through: tem })
+    );
   } catch (err) {
     res.status(404).send(err);
   }

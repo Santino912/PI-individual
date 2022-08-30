@@ -1,6 +1,4 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { deleteTemperament } from '../redux/actions'
 
 const ButtonsTemperaments = ({temperament, deleteTemperament}) => {
   return (

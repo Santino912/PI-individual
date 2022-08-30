@@ -39,8 +39,7 @@ const Home = () => {
       <div className={style.optionsFilter}>
         <div className={style.filterBreed} >
         <h4 style={{color: "white"}}>Filter by breed:</h4>
-        <select onClick={() => setIndex(0)} 
-        onChange={(e) => setGroup(e.target.value)} style={{width: "100px", height: "20px"}} defaultValue="default" name='group'>
+        <select onClick={() => setIndex(0)} onChange={(e) => setGroup(e.target.value)} style={{width: "100px", height: "20px"}} defaultValue="default" name='group'>
         <option style={{width: "10px", height: "40px"}} value="">None</option>
         {allBreedsGroups.map((breed, i) => <Breeds key={i} breed={breed} />)}
         </select>

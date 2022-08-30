@@ -52,6 +52,6 @@ export function breedsGroupsFilter(arr) {
   return existBreeds;
 }
 
-export function filterBreedsGroups(arr, breed) {
+/* export function filterBreedsGroups(arr, breed) {
   return !breed ? arr : arr.filter((dogs) => dogs.breed_group === breed);
-}
+} */
