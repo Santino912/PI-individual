@@ -4,12 +4,13 @@ import ButtonsTemperaments from '../componentsShorts/ButtonsTemperaments'
 import Temps from '../componentsShorts/Temps'
 import style from "../css/createDog.module.css"
 import { allBreeds } from '../redux/actions'
-import { stringToArr } from '../utils'
+import axios from "axios"
 
 const CreateDogs = () => {
   const [temperaments, setTemperaments] = useState([])
-  const [object, setObject] = useState({name:"", weight:"", height:"", life_span:"", img: "", temperament: "" })
- const allTemperaments = useSelector(state => state.allTemperaments)
+  const [object, setObject] = useState({name:"", weightMin: "", height:"", weightMax: "", life_span:"", img: "", temperament: "" })
+
+  const allTemperaments = useSelector(state => state.allTemperaments)
 
 
 const dispatch = useDispatch()
@@ -27,44 +28,51 @@ const handleSelect = (e) =>{
 }
 const deleteTemperament = (e) => {
   setTemperaments(temperaments.filter(t => t !== e))
+  setObject({...object,temperament: object.temperament.split(", ").filter(act => act !== e).join(", ")})
 }
 
-const handleSubmit = (e) => {
+
+
+const handleSubmit = async (e) => {
   e.preventDefault()
-  fetch("http://localhost:3001/dogs", {
-    method: "POST",
-    body:JSON.stringify(object),
-    headers:{
-      'Content-Type': 'application/json'
-    }
+  axios.post('http://localhost:3001/dogs', {...object}
+  )
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
   });
   setTemperaments([])
-  setObject({name:"", weight:"", height:"", life_span:"", img: "", temperament: "" })
+  setObject({name:"", weightMin: "", height:"", weightMax: "", life_span:"", img: "", temperament: ""  })
 }
   return (
     <div className={style.divCreateDog}>
         <form onSubmit={(e) => handleSubmit(e)} className={style.divContainer}>
         <h3>Image:</h3>
           <input style={{width: "300px", height: "25px"}} 
-          onChange={(e) => handleChange(e)} type="text" name="img" value={object.img} placeholder='Escribe aqui' required/>
+          onChange={(e) => handleChange(e)} type="text" name="img" value={object.img} placeholder='Url here' required/>
 
           <h3>Name:</h3>
           <input style={{width: "300px", height: "25px"}} 
-          onChange={(e) => handleChange(e)} type="text" name="name" value={object.name} placeholder='Escribe aqui' required/>
+          onChange={(e) => handleChange(e)} type="text" name="name" value={object.name} placeholder='Name here' required/>
           
           <h3>Weight:</h3>
-          <input style={{width: "300px", height: "25px"}} 
-          onChange={(e) =>handleChange(e)} type="text" name="weight" value={object.weight} placeholder='Escribe aqui' required />
+          <input style={{width: "150px", height: "25px"}} 
+          onChange={(e) =>handleChange(e)} type="number" name="weightMax" value={object.weightMax} placeholder='Max weight here' required />
+          <h3>-</h3>
+          <input style={{width: "150px", height: "25px"}}
+          onChange={(e) =>handleChange(e)} type="number" name="weightMin" value={object.weightMin} placeholder='Min weight here' required />
           
           <h3>Height:</h3>  
           <input style={{width: "300px", height: "25px"}} 
-          onChange={(e) =>handleChange(e)} type="text" name="height" value={object.height} placeholder='Escribe aqui'required/>
+          onChange={(e) =>handleChange(e)} type="number" name="height" value={object.height} placeholder='Height here'required/>
           
           <h3>Life span:</h3>
           <input style={{width: "300px", height: "25px"}} 
-          onChange={(e) =>handleChange(e)} type="text" name="life_span" value={object.life_span} placeholder='Escribe aqui'required/>
+          onChange={(e) =>handleChange(e)} type="text" name="life_span" value={object.life_span} placeholder='Life span here'required/>
 
-          <div >
+          <div>
             <h3>Temperaments:</h3>
           <select style={{width: "100px", height: "20px"}} defaultValue="default" onChange={(e) => handleSelect(e.target.value)} name='temperament'>
         <option style={{color: "gray", width: "10px", height: "40px"}} value="default" disabled >Default</option>

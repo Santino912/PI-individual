@@ -20,7 +20,7 @@ export default function NavBar() {
           </Link>
         </div>
         <div className={style.navBarSearch}>
-        <input type="text" onChange={(e) => {dispatch(filterName(e.target.value)); dispatch(resetPage())}} placeholder="SearchDog.." style={{margin: "10px"}} value={state.strFilter.str}></input>
+        <input type="text" onChange={(e) => {dispatch(filterName(e.target.value)); dispatch(resetPage())}} placeholder="SearchDog.." style={{margin: "10px"}} value={state.strFilter.str} />
         <button type="submit" value="Search">Search</button>
         </div>
     </div>

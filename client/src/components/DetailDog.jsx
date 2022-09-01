@@ -32,7 +32,7 @@ setLoading(false)
 
         <div className={style.contentCard}>
           <div>
-        <img  src={breedDetail?.image?.url} alt={breedDetail.name} />
+        <img className={style.contentCard} src={breedDetail?.image?.url} alt={breedDetail?.name} />
        </div>
 
         <div className={style.infDog}>
@@ -42,7 +42,7 @@ setLoading(false)
     <h4>Breed for: {breedDetail?.breed_group}</h4>
     <h4>Life span: {breedDetail?.life_span}</h4>
     <h4>Weight: {breedDetail?.weight?.imperial}</h4>
-    <h4>Metric: {breedDetail?.weight?.metric}</h4>    
+    <h4>Height: {breedDetail?.height?.imperial}</h4>    
 </div>
 </div>
 </div>

@@ -1,4 +1,4 @@
-import { strToRegEx } from "../../utils";
+import { strToRegEx, equalizeArr } from "../../utils";
 
 export const FETCH_ALL_BREEDS = "FETCH_ALL_BREEDS";
 export const FETCH_ONE_BREED = "FETCH_ONE_BREED";
@@ -10,6 +10,7 @@ export const FILTER_TEMPERAMENTS = "FILTER_TEMPERAMENTS";
 export const RESET_ALL = "RESET_ALL";
 export const SELECT_PUSH = "SELECT_PUSH";
 export const DELETE_TEMPERAMENTS = "DELETE_TEMPERAMENTS";
+export const SORT_ARR_ACTION = "SORT_ARR_ACTION";
 
 export function allBreeds() {
   let dataTemperaments;
@@ -22,7 +23,7 @@ export function allBreeds() {
       .then((data) =>
         dispatch({
           type: FETCH_ALL_BREEDS,
-          payload: { data, dataTemperaments },
+          payload: { data: equalizeArr(data), dataTemperaments },
         })
       );
   };
@@ -49,7 +50,7 @@ export function resetPage() {
   return { type: RESET_PAGE, payload: 0 };
 }
 
-export function addFilterTemperaments(payload) {
+export function setFilterTemperaments(payload) {
   return { type: FILTER_TEMPERAMENTS, payload };
 }
 
@@ -57,6 +58,9 @@ export function resetAll() {
   return { type: RESET_ALL };
 }
 
-export function deleteTemperament(payload) {
-  return { type: DELETE_TEMPERAMENTS, payload };
+export function sortArrAction(payload) {
+  if (payload === "") {
+    return allBreeds();
+  }
+  return { type: SORT_ARR_ACTION, payload };
 }

@@ -24,6 +24,12 @@ module.exports = {
       }
     });
   },
+  stringToArr(arr) {
+    return typeof arr == "string" ? arr.split(", ") : false;
+  },
+  twoStrToOneString: (aStr, bStr) => {
+    return `${aStr}-${bStr}`;
+  },
 };
 
 /* arr.map(async (name) => {

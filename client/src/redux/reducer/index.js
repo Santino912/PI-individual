@@ -1,4 +1,4 @@
-import { breedsGroupsFilter } from "../../utils";
+import { breedsGroupsFilter, sortArrBy } from "../../utils";
 import {
   CHANGE_PAGE,
   FETCH_ALL_BREEDS,
@@ -7,7 +7,7 @@ import {
   RESET_PAGE,
   FILTER_TEMPERAMENTS,
   RESET_ALL,
-  DELETE_TEMPERAMENTS,
+  SORT_ARR_ACTION,
 } from "../actions";
 
 let base = {
@@ -15,7 +15,7 @@ let base = {
   breedDetail: {},
   strFilter: { reg: new RegExp(""), str: "" },
   indexPage: 0,
-  filterTemperaments: [],
+  filterTemperament: [],
   allTemperaments: [],
 };
 let initialState = {
@@ -23,7 +23,7 @@ let initialState = {
   breedDetail: {},
   strFilter: { reg: new RegExp(""), str: "" },
   indexPage: 0,
-  filterTemperaments: [],
+  filterTemperament: [],
   allTemperaments: [],
   breedsGroups: [],
 };
@@ -60,18 +60,16 @@ const reducer = (state = initialState, action) => {
     case FILTER_TEMPERAMENTS:
       return {
         ...state,
-        filterTemperaments: [action.payload, ...state.filterTemperaments],
+        filterTemperament: action.payload,
       };
     case RESET_ALL:
       return {
         ...base,
       };
-    case DELETE_TEMPERAMENTS:
+    case SORT_ARR_ACTION:
       return {
         ...state,
-        filterTemperaments: state.filterTemperaments.filter(
-          (act) => act !== action.payload
-        ),
+        breedArr: sortArrBy(state.breedArr, action.payload),
       };
     default:
       return state;

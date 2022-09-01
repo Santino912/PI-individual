@@ -116,7 +116,7 @@ Se debe desarrollar una aplicación de React/Redux que contenga las siguientes p
   - Nombre
   - Temperamento
   - Peso
-- [ ] Botones/Opciones para filtrar por:
+- [x] Botones/Opciones para filtrar por:
   - Temperamento
   - Raza existente (es decir las que vienen de la API) o agregada por nosotros (creadas mediante el form)
 - [ ] Botones/Opciones para ordenar tanto ascendentemente como descendentemente las razas de perro por:

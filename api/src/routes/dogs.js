@@ -1,12 +1,16 @@
 const { Router } = require("express");
 const { Op } = require("sequelize");
-const { Breeds, Dogs, Temperaments } = require("../db");
+const { Breeds, Temperaments } = require("../db");
 const router = Router();
-const { dogsApiFetch } = require("../utils/addData");
+const {
+  dogsApiFetch,
+  toString,
+  twoStrToOneString,
+} = require("../utils/addData");
 const axios = require("axios");
 const { stringToArr } = require("../utils/addData");
 
-//dogsApiFetch();
+dogsApiFetch();
 
 router.get("/", async (req, res) => {
   const { name } = req.query;
@@ -15,30 +19,24 @@ router.get("/", async (req, res) => {
       .get("https://api.thedogapi.com/v1/breeds")
       .then((data) => data);
     breedsFetched = breedsFetched.data.map((breed) => {
-      const {
-        id,
-        name,
-        weight,
-        height,
-        life_span,
-        breed_group,
-        bred_for,
-        temperament,
-        image,
-      } = breed;
+      const { id, name, life_span, breed_group, bred_for, temperament, image } =
+        breed;
       return {
         id,
         name,
-        weight: weight.imperial,
-        height: height.imperial,
+        weight: breed.weight.imperial,
+        height: breed.height.imperial,
         life_span,
         breed_group,
         bred_for,
         temperament,
         img: image.url,
+        madeIn: "apiDog",
       };
     });
-    let breedsInData = await Breeds.findAll();
+    let breedsInData = await Breeds.findAll({
+      include: Temperaments,
+    });
     let concat =
       breedsInData.length < 1
         ? breedsFetched
@@ -82,31 +80,39 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  const { name, weightMax, weightMin, height, life_span, temperament, img } =
+    req.body;
+  if (
+    !name ||
+    !weightMax ||
+    !weightMin ||
+    !height ||
+    !life_span ||
+    !temperament ||
+    !img
+  ) {
+    return res.status(404).send("empty body");
+  }
   try {
-    const {
-      name,
-      weight,
-      height,
-      life_span,
-      breed_group,
-      bred_for,
-      temperament,
-      img,
-    } = req.body;
+    let weight = twoStrToOneString(weightMin, weightMax);
+    console.log(weight);
     let arrTemperament = stringToArr(temperament);
-    console.log(arrTemperament);
     let breed = await Breeds.create({
       name,
       weight,
       height,
       life_span,
-      breed_group,
-      bred_for,
       img,
     });
-    arrTemperament.map((tem) =>
-      breed.createTemperaments(Temperaments, { through: tem })
-    );
+    arrTemperament.map(async (name) => {
+      let findTemp = await Temperaments.findOne({
+        where: {
+          name,
+        },
+      });
+      await breed.addTemperament(findTemp);
+    });
+    return;
   } catch (err) {
     res.status(404).send(err);
   }
