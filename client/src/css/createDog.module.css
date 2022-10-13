@@ -1,0 +1,18 @@
+.divCreateDog{
+    width: 100vw;
+    height: 100vh;
+    background-color: aliceblue;
+    padding: 10px;
+}
+
+.divContainer{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    line-height: 50px;
+width:  800px;
+height: 800px;
+background-color: black;
+color: white;
+padding: 30px;
+}

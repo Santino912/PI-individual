@@ -1,22 +1,25 @@
 import React from 'react'
 import style from "../css/cardsDogs.module.css"
-import { useSelector} from "react-redux"
-
+import {Link} from "react-router-dom"
+import { fetchOneDetail } from '../redux/actions'
+import { useDispatch } from 'react-redux'
 
 const CardsDogs = ({dog}) => {
-
-const state = useSelector(state => state.breedArr)
+const dispatch = useDispatch()
   return (
     <div className={style.containCards}>
-      <h2 style={{padding: "20px"}}>{dog.name}</h2>
+      <Link onClick={() => dispatch(fetchOneDetail(dog.id))} to={`/dogs/${dog.id}`}>
+      <h2 style={{padding: "20px", color: "black"}}>{dog.name}</h2>
       <img className={style.imgCard} src={dog.img} alt={dog.id} />
+      </Link>
+
       <div className=''>
-      <h4>life_span: {dog.life_span}</h4>
-      <h4>temperament: {dog.temperament}</h4>
-      <h4>weight: {dog.weight}</h4>
-      <h4>height: {dog.height}</h4>
-      {dog.breed_group && <h4>breed_group: {dog.breed_group}</h4>} 
-      {dog.breed_for && <h4>breed_for: {dog.breed_for}</h4>}
+      <h4>Life span: {dog.life_span}</h4>
+      {dog.temperament && <h4>Temperaments: {dog.temperament}</h4>}
+      <h4>Weight: {dog.weight}</h4>
+      <h4>Height: {dog.height}</h4>
+      {dog.breed_group && <h4>Breed group: {dog.breed_group}</h4>} 
+      {dog.breed_for && <h4>Breed for: {dog.breed_for}</h4>}
     </div>
     </div>
   )

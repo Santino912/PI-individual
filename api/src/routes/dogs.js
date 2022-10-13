@@ -1,47 +1,56 @@
 const { Router } = require("express");
 const { Op } = require("sequelize");
-const { Breeds, Dogs } = require("../db");
+const { Breeds, Temperaments } = require("../db");
 const router = Router();
-const { dogsApiFetch } = require("../utils/addData");
+const {
+  dogsApiFetch,
+  toString,
+  twoStrToOneString,
+} = require("../utils/addData");
 const axios = require("axios");
+const { stringToArr } = require("../utils/addData");
 
-//dogsApiFetch();
+dogsApiFetch();
 
 router.get("/", async (req, res) => {
+  const { name } = req.query;
   try {
     let breedsFetched = await axios
       .get("https://api.thedogapi.com/v1/breeds")
       .then((data) => data);
     breedsFetched = breedsFetched.data.map((breed) => {
-      const {
-        id,
-        name,
-        weight,
-        height,
-        life_span,
-        breed_group,
-        bred_for,
-        temperament,
-        image,
-      } = breed;
+      const { id, name, life_span, breed_group, bred_for, temperament, image } =
+        breed;
       return {
         id,
         name,
-        weight: weight.imperial,
-        height: height.imperial,
+        weight: breed.weight.imperial,
+        height: breed.height.imperial,
         life_span,
         breed_group,
         bred_for,
         temperament,
         img: image.url,
+        madeIn: "apiDog",
       };
     });
-    let breedsInData = await Breeds.findAll();
+    let breedsInData = await Breeds.findAll({
+      include: Temperaments,
+    });
     let concat =
       breedsInData.length < 1
         ? breedsFetched
         : breedsInData.concat(breedsFetched);
-    return res.json(concat);
+    if (name) {
+      let regex = new RegExp(`${name}`, "i");
+      let final = concat.filter((act) => regex.test(act.breed_group));
+      if (final.length < 1) {
+        return res.json(["Dogs can´t found"]);
+      }
+      return res.json(final);
+    } else {
+      return res.json(concat);
+    }
   } catch (err) {
     return res.status(404).send(err);
   }
@@ -71,41 +80,39 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const {
-    id,
-    name,
-    weight,
-    height,
-    life_span,
-    breed_group,
-    bred_for,
-    temperament,
-    img,
-  } = req.body;
-  if (!id || !name || !weight || !height || !temperament || !img) {
-    return res.send({
-      id,
-      name,
-      weight,
-      height,
-      temperament,
-      life_span,
-      breed_group,
-      bred_for,
-    });
+  const { name, weightMax, weightMin, height, life_span, temperament, img } =
+    req.body;
+  if (
+    !name ||
+    !weightMax ||
+    !weightMin ||
+    !height ||
+    !life_span ||
+    !temperament ||
+    !img
+  ) {
+    return res.status(404).send("empty body");
   }
   try {
-    let breed = await breed.create({
-      id,
+    let weight = twoStrToOneString(weightMin, weightMax);
+    console.log(weight);
+    let arrTemperament = stringToArr(temperament);
+    let breed = await Breeds.create({
       name,
       weight,
       height,
-      temperament,
       life_span,
-      breed_group,
-      bred_for,
       img,
     });
+    arrTemperament.map(async (name) => {
+      let findTemp = await Temperaments.findOne({
+        where: {
+          name,
+        },
+      });
+      await breed.addTemperament(findTemp);
+    });
+    return;
   } catch (err) {
     res.status(404).send(err);
   }
