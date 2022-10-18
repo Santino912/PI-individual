@@ -1,4 +1,4 @@
-import { breedsGroupsFilter, sortArrBy } from "../../utils";
+import { breedsGroupsFilter, sortArrBy, verifTemperaments } from "../../utils";
 import {
   CHANGE_PAGE,
   FETCH_ALL_BREEDS,
@@ -40,7 +40,7 @@ const reducer = (state = initialState, action) => {
     case FETCH_ONE_BREED:
       return {
         ...state,
-        breedDetail: action.payload,
+        breedDetail: verifTemperaments(action.payload),
       };
     case FILTER_NAME:
       return {

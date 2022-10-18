@@ -23,16 +23,17 @@
   justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 50px;
   background-color: black;
   padding: 80px 0;
 }
 
 .optionsFilter{
   width: 100%;
-  padding: 10px 100px;
+  gap: 30px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 .temperamentsDiv{
   margin: 0 100px;

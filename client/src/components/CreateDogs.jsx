@@ -9,6 +9,7 @@ import axios from "axios"
 const CreateDogs = () => {
   const [temperaments, setTemperaments] = useState([])
   const [object, setObject] = useState({name:"", weightMin: "", height:"", weightMax: "", life_span:"", img: "", temperament: "" })
+  const [error, setError] = useState(false)
 
   const allTemperaments = useSelector(state => state.allTemperaments)
 
@@ -23,6 +24,13 @@ const handleChange = (e) =>{
 }
 
 const handleSelect = (e) =>{
+if(temperaments.includes(e)){
+  setError(true)
+  setTimeout(function (){
+    setError(false)
+  },1000)
+return
+}
   setTemperaments([...temperaments, e])
   setObject({...object, temperament: !object.temperament ? `${e}` : `${object.temperament}, ${e}`})
 }
@@ -81,6 +89,7 @@ const handleSubmit = async (e) => {
         </div>
 
         <div style={{display:"flex", flexDirection: "row"}}>
+          {error && <h2>No introducir el mismo valor</h2>}
         {temperaments.map((temperament,i ) => <ButtonsTemperaments key={i} deleteTemperament={deleteTemperament} temperament={temperament} /> )}
         </div>
           

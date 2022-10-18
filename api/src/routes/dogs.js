@@ -1,16 +1,12 @@
 const { Router } = require("express");
-const { Op } = require("sequelize");
 const { Breeds, Temperaments } = require("../db");
 const router = Router();
-const {
-  dogsApiFetch,
-  toString,
-  twoStrToOneString,
-} = require("../utils/addData");
+const { dogsApiFetch, twoStrToOneString } = require("../utils/addData");
 const axios = require("axios");
 const { stringToArr } = require("../utils/addData");
 
-dogsApiFetch();
+//add temperaments to DB
+//dogsApiFetch();
 
 router.get("/", async (req, res) => {
   const { name } = req.query;
@@ -19,16 +15,13 @@ router.get("/", async (req, res) => {
       .get("https://api.thedogapi.com/v1/breeds")
       .then((data) => data);
     breedsFetched = breedsFetched.data.map((breed) => {
-      const { id, name, life_span, breed_group, bred_for, temperament, image } =
-        breed;
+      const { name, life_span, breed_group, temperament, image } = breed;
       return {
-        id,
         name,
         weight: breed.weight.imperial,
         height: breed.height.imperial,
         life_span,
         breed_group,
-        bred_for,
         temperament,
         img: image.url,
         madeIn: "apiDog",
@@ -41,6 +34,8 @@ router.get("/", async (req, res) => {
       breedsInData.length < 1
         ? breedsFetched
         : breedsInData.concat(breedsFetched);
+    let id = 0;
+    concat.map((dog) => (dog.id = id++));
     if (name) {
       let regex = new RegExp(`${name}`, "i");
       let final = concat.filter((act) => regex.test(act.breed_group));
@@ -60,17 +55,11 @@ router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     let breedsFetched = await axios
-      .get("https://api.thedogapi.com/v1/breeds")
+      .get("http://localhost:3001/dogs")
       .then((data) => data);
     breedsFetched = await breedsFetched.data.find((breed) => breed.id == id);
     if (!breedsFetched) {
-      let breedFinded = await Breeds.findOne({
-        where: {
-          id: { [Op.eq]: id },
-        },
-      });
-      breedFinded = breedFinded == null && [`El id ${id} no se econtro`];
-      return res.json(breedFinded);
+      return res.json({ error: `error` });
     } else {
       return res.json(breedsFetched);
     }
@@ -95,7 +84,6 @@ router.post("/", async (req, res) => {
   }
   try {
     let weight = twoStrToOneString(weightMin, weightMax);
-    console.log(weight);
     let arrTemperament = stringToArr(temperament);
     let breed = await Breeds.create({
       name,
