@@ -81,7 +81,6 @@
   opacity: 0;
   transform: translateY(20%);
   transition: 0.5s ease-out;
-
   display: none;
   width: 100%;
   height: 100%;
@@ -112,15 +111,12 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   height: 100%;
   width: 100%;
   max-width: 400px;
   max-height: 250px;
-  transition: ease-out 0.5s;
-}
-
-.card:hover .dogImg {
-  display: none;
   transition: ease-out 0.5s;
 }
 
@@ -132,6 +128,12 @@
 }
 
 .card:hover .img {
-  display: none;
+  opacity: 0.5;
   transition: 0.5s ease-out;
+}
+.nameDogImg {
+  color: white;
+}
+.card:hover .nameDogImg {
+  display: none;
 }

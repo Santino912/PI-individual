@@ -10,8 +10,7 @@ import {
 import { cutArr, filterAll } from "../utils";
 import Temps from "../componentsShorts/Temps";
 import { Loading } from "../componentsShorts/Loading";
-import Breeds from "../componentsShorts/Breeds";
-import { SelectMaterial } from "./materialUI";
+import { SelectMaterial } from "./materialUI/Select";
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
@@ -43,10 +42,15 @@ const Home = () => {
     setLoading(true);
     dispatch(allBreeds());
     setLoading(false);
-  }, [dispatch]);
+  }, [dispatch, group]);
 
   const handleIndex = (i) => {
     setIndex(i);
+  };
+
+  const handleClick = (e) => {
+    setIndex(0);
+    setGroup(e);
   };
 
   return (
@@ -54,9 +58,8 @@ const Home = () => {
       {loading && <Loading />}
       <div className={style.optionsFilter}>
         <div className={style.filterBreed}>
-          <h4 style={{ color: "white" }}>Filter by breed:</h4>
+          {/*                <h4 style={{ color: "white" }}>Filter by breed:</h4>
           <select
-            onClick={() => setIndex(0)}
             onChange={(e) => setGroup(e.target.value)}
             style={{ width: "100px", height: "20px" }}
             defaultValue=""
@@ -68,9 +71,17 @@ const Home = () => {
             {allBreedsGroups.map((breed, i) => (
               <Breeds key={i} breed={breed} />
             ))}
-          </select>
+          </select> */}
+          <SelectMaterial
+            filterBy={"Filter by breed"}
+            allBreedsGroups={allBreedsGroups}
+            defaultValue="All"
+            setGroup={setGroup}
+            value={group}
+            change={handleClick}
+          />
         </div>
-        <SelectMaterial>dwadwadf</SelectMaterial>
+
         <div className={style.filterTemperaments}>
           <h4 style={{ color: "white" }}>Filter temperament by:</h4>
           <select
