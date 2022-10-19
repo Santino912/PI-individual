@@ -6,10 +6,9 @@ module.exports = (sequelize) => {
     "Breeds",
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
       },
       name: {
         type: DataTypes.STRING,
@@ -28,12 +27,6 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       life_span: {
-        type: DataTypes.STRING,
-      },
-      breedFor: {
-        type: DataTypes.STRING,
-      },
-      breedGroup: {
         type: DataTypes.STRING,
       },
     },
