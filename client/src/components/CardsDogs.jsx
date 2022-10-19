@@ -9,14 +9,22 @@ const CardsDogs = ({ dog }) => {
   return (
     <div className={style.card}>
       <div className={style.cardImg} />
-      <div className={style.dogData}>
+      <div className={style.dogImg}>
         <img className={style.img} src={dog.img} />
       </div>
       <div className={style.cardInfo}>
-        <p className={style.textTitle}>Name: {dog?.name}</p>
+        <p className={style.textTitle}>{dog?.name}</p>
         <p className={style.textBody}>Weight: {dog?.weight}</p>
+        {dog.breed_group && (
+          <p className={style.textBody}>Breed group: {dog.breed_group}</p>
+        )}
         <p className={style.textBody}>Temperaments: {dog?.temperament}</p>
-        <button className={style.cardButton}>Read More</button>
+        <Link
+          onClick={() => dispatch(fetchOneDetail(dog.id))}
+          to={`/dogs/${dog.id}`}
+        >
+          <button className={style.cardButton}>Read More</button>
+        </Link>
       </div>
     </div>
   );

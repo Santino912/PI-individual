@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import style from "../css/detailCard.module.css";
-import { fetchOneDetail } from "../redux/actions";
+import { clearDetailDog, fetchOneDetail } from "../redux/actions";
 import { Loading } from "../componentsShorts/Loading";
 
 const DetailDog = () => {
@@ -15,6 +15,9 @@ const DetailDog = () => {
     setLoading(true);
     dispatch(fetchOneDetail(id));
     setLoading(false);
+    return () => {
+      dispatch(clearDetailDog());
+    };
   }, [dispatch, id]);
 
   const breedDetail = useSelector((state) => state.breedDetail);
@@ -22,13 +25,15 @@ const DetailDog = () => {
   return (
     <div className={style.detailCard}>
       {loading && <Loading />}
-      <div style={{ width: "100%", height: "100%" }}>
-        <h1 style={{ padding: "10px" }}>Breed name: {breedDetail?.name}</h1>
+      <div style={{ width: "100%", height: "5%" }}>
+        <h1 style={{ paddingBottom: "10px", backgroundColor: "white" }}>
+          Breed name: {breedDetail?.name}
+        </h1>
 
         <div className={style.contentCard}>
-          <div>
+          <div className={style.imgContainer}>
             <img
-              className={style.contentCard}
+              className={style.img}
               src={breedDetail?.img}
               alt={breedDetail?.name}
             />

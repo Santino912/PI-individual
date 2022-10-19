@@ -11,6 +11,7 @@ import { cutArr, filterAll } from "../utils";
 import Temps from "../componentsShorts/Temps";
 import { Loading } from "../componentsShorts/Loading";
 import Breeds from "../componentsShorts/Breeds";
+import { SelectMaterial } from "./materialUI";
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
@@ -69,7 +70,7 @@ const Home = () => {
             ))}
           </select>
         </div>
-
+        <SelectMaterial>dwadwadf</SelectMaterial>
         <div className={style.filterTemperaments}>
           <h4 style={{ color: "white" }}>Filter temperament by:</h4>
           <select

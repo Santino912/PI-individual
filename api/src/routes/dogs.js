@@ -6,7 +6,7 @@ const axios = require("axios");
 const { stringToArr } = require("../utils/addData");
 
 //add temperaments to DB
-//dogsApiFetch();
+dogsApiFetch();
 
 router.get("/", async (req, res) => {
   const { name } = req.query;
@@ -15,8 +15,9 @@ router.get("/", async (req, res) => {
       .get("https://api.thedogapi.com/v1/breeds")
       .then((data) => data);
     breedsFetched = breedsFetched.data.map((breed) => {
-      const { name, life_span, breed_group, temperament, image } = breed;
+      const { name, life_span, breed_group, temperament, image, id } = breed;
       return {
+        id,
         name,
         weight: breed.weight.imperial,
         height: breed.height.imperial,
@@ -34,8 +35,6 @@ router.get("/", async (req, res) => {
       breedsInData.length < 1
         ? breedsFetched
         : breedsInData.concat(breedsFetched);
-    let id = 0;
-    concat.map((dog) => (dog.id = id++));
     if (name) {
       let regex = new RegExp(`${name}`, "i");
       let final = concat.filter((act) => regex.test(act.breed_group));
@@ -85,6 +84,8 @@ router.post("/", async (req, res) => {
   try {
     let weight = twoStrToOneString(weightMin, weightMax);
     let arrTemperament = stringToArr(temperament);
+    console.log("breed");
+
     let breed = await Breeds.create({
       name,
       weight,
@@ -102,7 +103,7 @@ router.post("/", async (req, res) => {
     });
     return;
   } catch (err) {
-    res.status(404).send(err);
+    res.status(404).send(err.response);
   }
 });
 

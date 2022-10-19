@@ -8,6 +8,7 @@ import {
   FILTER_TEMPERAMENTS,
   RESET_ALL,
   SORT_ARR_ACTION,
+  CLEAR_DETAIL_DOG,
 } from "../actions";
 
 let base = {
@@ -70,6 +71,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         breedArr: sortArrBy(state.breedArr, action.payload),
+      };
+    case CLEAR_DETAIL_DOG:
+      return {
+        ...state,
+        breedDetail: {},
       };
     default:
       return state;
