@@ -1,8 +1,8 @@
 import { MenuItem } from "@mui/material";
 import React from "react";
 
-const OptionMaterial = ({ breed }) => {
-  return <MenuItem value={breed}>{breed}</MenuItem>;
+const OptionMaterial = ({ name }) => {
+  return <MenuItem value={name}>{name}</MenuItem>;
 };
 
 export default OptionMaterial;

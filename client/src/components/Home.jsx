@@ -11,6 +11,7 @@ import { cutArr, filterAll } from "../utils";
 import Temps from "../componentsShorts/Temps";
 import { Loading } from "../componentsShorts/Loading";
 import { SelectMaterial } from "./materialUI/Select";
+import { FormControl } from "@mui/material";
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
@@ -48,11 +49,6 @@ const Home = () => {
     setIndex(i);
   };
 
-  const handleClick = (e) => {
-    setIndex(0);
-    setGroup(e);
-  };
-
   return (
     <div className={style.divHome}>
       {loading && <Loading />}
@@ -72,14 +68,16 @@ const Home = () => {
               <Breeds key={i} breed={breed} />
             ))}
           </select> */}
-          <SelectMaterial
-            filterBy={"Filter by breed"}
-            allBreedsGroups={allBreedsGroups}
-            defaultValue="All"
-            setGroup={setGroup}
-            value={group}
-            change={handleClick}
-          />
+          <FormControl>
+            <SelectMaterial
+              filterBy={"Filter by breed"}
+              arrayToSelect={allBreedsGroups}
+              defaultValue="All"
+              value={group}
+              setter={setGroup}
+              setIndex={setIndex}
+            />
+          </FormControl>
         </div>
 
         <div className={style.filterTemperaments}>
