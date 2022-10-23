@@ -95,7 +95,6 @@ router.post("/", async (req, res) => {
   }
   try {
     let weight = twoStrToOneString(weightMin, weightMax);
-    console.log(weight);
     let arrTemperament = stringToArr(temperament);
     let breed = await Breeds.create({
       name,

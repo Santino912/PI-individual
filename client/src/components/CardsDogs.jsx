@@ -1,13 +1,28 @@
-import React from 'react'
-import style from "../css/cardsDogs.module.css"
-import {Link} from "react-router-dom"
-import { fetchOneDetail } from '../redux/actions'
-import { useDispatch } from 'react-redux'
+import React from "react";
+import style from "../css/cardsDogs.module.css";
+import { Link } from "react-router-dom";
+import { fetchOneDetail } from "../redux/actions";
+import { useDispatch } from "react-redux";
 
-const CardsDogs = ({dog}) => {
-const dispatch = useDispatch()
+const CardsDogs = ({ dog }) => {
+  const dispatch = useDispatch();
   return (
-    <div className={style.containCards}>
+    <Link
+      onClick={() => dispatch(fetchOneDetail(dog.id))}
+      to={`/dogs/${dog.id}`}
+    >
+      <div className={style.card}>
+        <div className={style.blob}></div>
+        <span className={style.imgSpan}>
+          <img className={style.img} src={dog.img} />
+        </span>
+        <h2>{dog?.name}</h2>
+        <p></p>
+      </div>
+    </Link>
+  );
+};
+/*     <div className={style.containCards}>
       <Link onClick={() => dispatch(fetchOneDetail(dog.id))} to={`/dogs/${dog.id}`}>
       <h2 style={{padding: "20px", color: "black"}}>{dog.name}</h2>
       <img className={style.imgCard} src={dog.img} alt={dog.id} />
@@ -21,8 +36,5 @@ const dispatch = useDispatch()
       {dog.breed_group && <h4>Breed group: {dog.breed_group}</h4>} 
       {dog.breed_for && <h4>Breed for: {dog.breed_for}</h4>}
     </div>
-    </div>
-  )
-}
-
-export default CardsDogs
+    </div> */
+export default CardsDogs;
