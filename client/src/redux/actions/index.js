@@ -13,6 +13,7 @@ export const DELETE_TEMPERAMENTS = "DELETE_TEMPERAMENTS";
 export const SORT_ARR_ACTION = "SORT_ARR_ACTION";
 export const RESET_BREED_DETAIL = "RESET_BREED_DETAIL";
 
+
 export function allBreeds() {
   let dataTemperaments;
   fetch("http://localhost:3001/temperaments")
@@ -68,4 +69,5 @@ export function sortArrAction(payload) {
 
 export function resetDetailBreed() {
   return { type: RESET_BREED_DETAIL };
+
 }

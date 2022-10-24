@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import style from "../css/detailCard.module.css";
+
 import { fetchOneDetail, resetDetailBreed } from "../redux/actions";
+
 import { Loading } from "../componentsShorts/Loading";
 
 const DetailDog = () => {
@@ -17,10 +19,12 @@ const DetailDog = () => {
     setLoading(false);
     return () => {
       dispatch(resetDetailBreed());
+
     };
   }, [dispatch, id]);
 
   const breedDetail = useSelector((state) => state.breedDetail);
+
   console.log(breedDetail);
   return (
     <div className={style.detailCard}>
@@ -47,6 +51,7 @@ const DetailDog = () => {
             <h4>Weight: {breedDetail?.weight?.imperial}</h4>
             <h4>Height: {breedDetail?.height?.imperial}</h4>
             <h4>Temperaments: {breedDetail?.temperament}</h4>
+
           </div>
         </div>
       </div>
