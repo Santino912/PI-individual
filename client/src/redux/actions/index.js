@@ -11,6 +11,7 @@ export const RESET_ALL = "RESET_ALL";
 export const SELECT_PUSH = "SELECT_PUSH";
 export const DELETE_TEMPERAMENTS = "DELETE_TEMPERAMENTS";
 export const SORT_ARR_ACTION = "SORT_ARR_ACTION";
+export const RESET_BREED_DETAIL = "RESET_BREED_DETAIL";
 
 export function allBreeds() {
   let dataTemperaments;
@@ -63,4 +64,8 @@ export function sortArrAction(payload) {
     return allBreeds();
   }
   return { type: SORT_ARR_ACTION, payload };
+}
+
+export function resetDetailBreed() {
+  return { type: RESET_BREED_DETAIL };
 }

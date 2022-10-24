@@ -19,9 +19,9 @@
   width: 75%;
   border-radius: 0 0 30px 30px;
   margin: 0 auto;
-  background-color: var(--dark-color);
+  background-color: var(--principal-darkcolor);
   visibility: visible;
-  transition: all 0.3s;
+  transition: all 0.5s;
 }
 
 .card:hover .blob {
@@ -55,7 +55,7 @@
   padding: 15px 10px;
   font-size: 25px;
   line-height: 30px !important;
-  transition: all 0.1s;
+  transition: all 0.5s;
   z-index: -99;
   line-height: 17px;
 }
@@ -64,23 +64,14 @@
   font-size: 18px;
 }
 
-.card:hover h2 {
+.card > h4 {
   opacity: 0;
   transition: all 0.5s;
 }
 
-.card > p {
-  opacity: 0;
-  transition: all 0.75s;
-}
-
-.card > p > svg {
-  padding: 5px;
-}
-
-.card:hover > p {
+.card:hover > h4 {
   opacity: 1;
-  transition: all 0.1s;
+  transition: all 0.5s;
 }
 
 .img {
