@@ -11,7 +11,7 @@ import { cutArr, filterAll } from "../utils";
 import Temps from "../componentsShorts/Temps";
 import { Loading } from "../componentsShorts/Loading";
 import Breeds from "../componentsShorts/Breeds";
-import { SelectMaterial } from "./materialUI";
+
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
@@ -54,11 +54,11 @@ const Home = () => {
       {loading && <Loading />}
       <div className={style.optionsFilter}>
         <div className={style.filterBreed}>
-          <h4 style={{ color: "white" }}>Filter by breed:</h4>
+          <h4>Filter by breed:</h4>
           <select
             onClick={() => setIndex(0)}
             onChange={(e) => setGroup(e.target.value)}
-            style={{ width: "100px", height: "20px" }}
+            className={style.selectFilter}
             defaultValue=""
             name="group"
           >
@@ -72,11 +72,11 @@ const Home = () => {
         </div>
         <SelectMaterial>dwadwadf</SelectMaterial>
         <div className={style.filterTemperaments}>
-          <h4 style={{ color: "white" }}>Filter temperament by:</h4>
+          <h4>Filter temperament by: </h4>
           <select
             onClick={() => setIndex(0)}
             onChange={(e) => dispatch(setFilterTemperaments(e.target.value))}
-            style={{ width: "100px", height: "20px" }}
+            className={style.selectFilter}
             defaultValue=""
             name="temperaments"
           >
@@ -93,26 +93,26 @@ const Home = () => {
         </div>
 
         <div className={style.filterTemperaments}>
-          <h4 style={{ color: "white" }}>Filter by place of creation:</h4>
+          <h4>Filter by place of creation:</h4>
           <select
             onClick={() => setIndex(0)}
             onChange={(e) => setMadeIn(e.target.value)}
-            style={{ width: "100px", height: "20px" }}
+            className={style.selectFilter}
             defaultValue=""
             name="temperaments"
           >
-            <option value="All">All</option>
+            <option value="">All</option>
             <option value="apiDog">ApiDog</option>
             <option value="local">Local</option>
           </select>
         </div>
 
         <div className={style.filterTemperaments}>
-          <h4 style={{ color: "white" }}>Sort by:</h4>
+          <h4>Sort by:</h4>
           <select
             onClick={() => setIndex(0)}
             onChange={(e) => dispatch(sortArrAction(e.target.value))}
-            style={{ width: "100px", height: "20px" }}
+            className={style.selectFilter}
             defaultValue=""
             name="temperaments"
           >
@@ -137,7 +137,9 @@ const Home = () => {
             <CardsDogs key={i} dog={dog} />
           ))
         ) : (
-          <h1 style={{ color: "white" }}>Can´t found dogs with the features</h1>
+          <h1 style={{ color: "var(--principal-darkcolor)" }}>
+            Can´t found dogs with the features
+          </h1>
         )}
       </div>
 

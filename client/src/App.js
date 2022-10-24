@@ -13,8 +13,8 @@ function App() {
       <Route exact path="/" render={() => <LandingPage />} />
       <Route path="/home" render={() => <NavBar />} />
       <Route exact path="/home" render={() => <Home />} />
-      <Route exact path="/dogs/:id" render={() => <DetailDog />} />
-      <Route exact path="/dog/create" render={() => <CreateDogs />} />
+      <Route exact path="/home/detail/:id" render={() => <DetailDog />} />
+      <Route exact path="/home/create" render={() => <CreateDogs />} />
     </div>
   );
 }

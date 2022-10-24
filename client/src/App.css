@@ -1,3 +1,10 @@
+:root {
+  --principal-darkcolor: #5f7161;
+  --principal-lightcolor: #6d8b74;
+  --light-color: #efead8;
+  --dark-color: #d0c9c0;
+}
+
 .App {
   text-align: center;
   height: 100%;
