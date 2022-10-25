@@ -58,19 +58,8 @@ router.get("/:id", async (req, res) => {
       .then((data) => data);
     breedsFetched = await breedsFetched.data.find((breed) => breed.id == id);
     if (!breedsFetched) {
-      let breedFinded = await Breeds.findOne({
-        where: { id },
-        include: Temperaments,
-      });
-
-      return res.json(breedFinded);
+      return res.json({ error: `error` });
     } else {
-      breedsFetched = {
-        ...breedsFetched,
-        weight: breedsFetched.weight.imperial,
-        height: breedsFetched.height.imperial,
-        img: breedsFetched.image.url,
-      };
       return res.json(breedsFetched);
     }
   } catch (err) {
