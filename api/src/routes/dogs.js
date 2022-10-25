@@ -1,11 +1,11 @@
 const { Router } = require("express");
-const { Op } = require("sequelize");
 const { Breeds, Temperaments } = require("../db");
 const router = Router();
 const { dogsApiFetch, twoStrToOneString } = require("../utils/addData");
 const axios = require("axios");
 const { stringToArr } = require("../utils/addData");
 
+//add temperaments to DB
 dogsApiFetch();
 
 router.get("/", async (req, res) => {
@@ -15,8 +15,7 @@ router.get("/", async (req, res) => {
       .get("https://api.thedogapi.com/v1/breeds")
       .then((data) => data);
     breedsFetched = breedsFetched.data.map((breed) => {
-      const { id, name, life_span, breed_group, bred_for, temperament, image } =
-        breed;
+      const { name, life_span, breed_group, temperament, image, id } = breed;
       return {
         id,
         name,
@@ -24,7 +23,6 @@ router.get("/", async (req, res) => {
         height: breed.height.imperial,
         life_span,
         breed_group,
-        bred_for,
         temperament,
         img: image.url,
         madeIn: "apiDog",
@@ -56,7 +54,7 @@ router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     let breedsFetched = await axios
-      .get("https://api.thedogapi.com/v1/breeds")
+      .get("http://localhost:3001/dogs")
       .then((data) => data);
     breedsFetched = await breedsFetched.data.find((breed) => breed.id == id);
     if (!breedsFetched) {
@@ -97,6 +95,8 @@ router.post("/", async (req, res) => {
   try {
     let weight = twoStrToOneString(weightMin, weightMax);
     let arrTemperament = stringToArr(temperament);
+    console.log("breed");
+
     let breed = await Breeds.create({
       name,
       weight,
@@ -114,7 +114,7 @@ router.post("/", async (req, res) => {
     });
     return;
   } catch (err) {
-    res.status(404).send(err);
+    res.status(404).send(err.response);
   }
 });
 

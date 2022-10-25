@@ -12,12 +12,14 @@ export function stringToArr(arr) {
 }
 
 export function equalizeArr(arr) {
-  let filter = arr.filter((act) =>
-    act?.Temperaments
-      ? ((act.temperament = act.Temperaments.map((e) => e.name).join(", ")),
-        (act.madeIn = "local"))
-      : act
-  );
+  let filter = arr.map((act) => {
+    let temps = act?.Temperaments;
+    if (Array.isArray(temps)) {
+      act.temperament = act.Temperaments.map((e) => e.name).join(", ");
+      act.madeIn = "local";
+    }
+    return act;
+  });
   return filter;
 }
 
@@ -72,6 +74,16 @@ export function sortArrBy(arr, sort) {
     return sort === "+" ? a.reverse() : a;
   }
 }
+
+export function verifTemperaments(breed) {
+  if (Array.isArray(breed?.Temperaments)) {
+    breed.temperament = breed.Temperaments.map((e) => e.name).join(", ");
+    return breed;
+  }
+  return breed;
+}
+
+//Funciones para uso local
 
 const sortFunction = (a, b) => {
   let aValue = parseInt(
