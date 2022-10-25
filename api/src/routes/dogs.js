@@ -2,11 +2,7 @@ const { Router } = require("express");
 const { Op } = require("sequelize");
 const { Breeds, Temperaments } = require("../db");
 const router = Router();
-const {
-  dogsApiFetch,
-  toString,
-  twoStrToOneString,
-} = require("../utils/addData");
+const { dogsApiFetch, twoStrToOneString } = require("../utils/addData");
 const axios = require("axios");
 const { stringToArr } = require("../utils/addData");
 
@@ -65,13 +61,18 @@ router.get("/:id", async (req, res) => {
     breedsFetched = await breedsFetched.data.find((breed) => breed.id == id);
     if (!breedsFetched) {
       let breedFinded = await Breeds.findOne({
-        where: {
-          id: { [Op.eq]: id },
-        },
+        where: { id },
+        include: Temperaments,
       });
-      breedFinded = breedFinded == null && [`El id ${id} no se econtro`];
+
       return res.json(breedFinded);
     } else {
+      breedsFetched = {
+        ...breedsFetched,
+        weight: breedsFetched.weight.imperial,
+        height: breedsFetched.height.imperial,
+        img: breedsFetched.image.url,
+      };
       return res.json(breedsFetched);
     }
   } catch (err) {

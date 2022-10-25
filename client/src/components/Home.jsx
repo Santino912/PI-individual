@@ -37,7 +37,6 @@ const Home = () => {
     )
   );
   const allBreedsGroups = useSelector((state) => state.breedsGroups);
-
   useEffect(() => {
     setLoading(true);
     dispatch(allBreeds());

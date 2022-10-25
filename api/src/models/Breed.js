@@ -30,10 +30,10 @@ module.exports = (sequelize) => {
       life_span: {
         type: DataTypes.STRING,
       },
-      breedFor: {
+      bred_for: {
         type: DataTypes.STRING,
       },
-      breedGroup: {
+      breed_group: {
         type: DataTypes.STRING,
       },
     },

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ButtonsTemperaments from "../componentsShorts/ButtonsTemperaments";
-import Temps from "../componentsShorts/Temps";
 import style from "../css/createDog.module.css";
 import { allBreeds } from "../redux/actions";
 import axios from "axios";
+import OptionsVerif from "../componentsShorts/OptionsVerif";
 
 const CreateDogs = () => {
   const [temperaments, setTemperaments] = useState([]);
@@ -84,8 +84,8 @@ const CreateDogs = () => {
           />
         </div>
 
-        <div>
-          <h3>Name:</h3>
+        <div className={style.inputContainer}>
+          <h3 className={style.nameInput}>Name:</h3>
           <input
             style={{ width: "300px", height: "25px" }}
             onChange={(e) => handleChange(e)}
@@ -97,8 +97,8 @@ const CreateDogs = () => {
           />
         </div>
 
-        <div>
-          <h3>Weight:</h3>
+        <div className={style.inputContainer}>
+          <h3 className={style.nameInput}>Weight:</h3>
           <input
             style={{ width: "150px", height: "25px" }}
             onChange={(e) => handleChange(e)}
@@ -108,7 +108,7 @@ const CreateDogs = () => {
             placeholder="Max weight here"
             required
           />
-          <h3>-</h3>
+          <h3 className={style.nameInput}>-</h3>
           <input
             style={{ width: "150px", height: "25px" }}
             onChange={(e) => handleChange(e)}
@@ -120,30 +120,34 @@ const CreateDogs = () => {
           />
         </div>
 
-        <h3>Height:</h3>
-        <input
-          style={{ width: "300px", height: "25px" }}
-          onChange={(e) => handleChange(e)}
-          type="number"
-          name="height"
-          value={object.height}
-          placeholder="Height here"
-          required
-        />
+        <div className={style.inputContainer}>
+          <h3 className={style.nameInput}>Height:</h3>
+          <input
+            style={{ width: "300px", height: "25px" }}
+            onChange={(e) => handleChange(e)}
+            type="number"
+            name="height"
+            value={object.height}
+            placeholder="Height here"
+            required
+          />
+        </div>
 
-        <h3>Life span:</h3>
-        <input
-          style={{ width: "300px", height: "25px" }}
-          onChange={(e) => handleChange(e)}
-          type="text"
-          name="life_span"
-          value={object.life_span}
-          placeholder="Life span here"
-          required
-        />
+        <div className={style.inputContainer}>
+          <h3 className={style.nameInput}>Life span:</h3>
+          <input
+            style={{ width: "300px", height: "25px" }}
+            onChange={(e) => handleChange(e)}
+            type="text"
+            name="life_span"
+            value={object.life_span}
+            placeholder="Life span here"
+            required
+          />
+        </div>
 
-        <div>
-          <h3>Temperaments:</h3>
+        <div className={style.inputContainer}>
+          <h3 className={style.nameInput}>Temperaments:</h3>
           <select
             style={{ width: "100px", height: "20px" }}
             defaultValue="default"
@@ -158,12 +162,18 @@ const CreateDogs = () => {
               Default
             </option>
             {allTemperaments?.map((t, i) => (
-              <Temps key={i} temperament={t} />
+              <OptionsVerif
+                key={i}
+                temperament={t}
+                selectTemperaments={temperaments}
+              />
             ))}
           </select>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "row" }}>
+        <div
+          style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}
+        >
           {temperaments.map((temperament, i) => (
             <ButtonsTemperaments
               key={i}

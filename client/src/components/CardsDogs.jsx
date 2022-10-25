@@ -14,7 +14,7 @@ const CardsDogs = ({ dog }) => {
       <div className={style.card}>
         <div className={style.blob}></div>
         <span className={style.imgSpan}>
-          <img className={style.img} src={dog.img} />
+          <img className={style.img} src={dog.img} alt={`${dog.name} Img`} />
         </span>
         <h2>{dog?.name}</h2>
         <h4>Life span: {dog.life_span}</h4>

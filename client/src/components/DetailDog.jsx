@@ -21,7 +21,6 @@ const DetailDog = () => {
   }, [dispatch, id]);
 
   const breedDetail = useSelector((state) => state.breedDetail);
-  console.log(breedDetail);
   return (
     <div className={style.detailCard}>
       {loading && <Loading />}
@@ -32,7 +31,7 @@ const DetailDog = () => {
           <div className={style.imgContainer}>
             <img
               className={style.img}
-              src={breedDetail?.image?.url}
+              src={breedDetail?.img}
               alt={breedDetail?.name}
             />
           </div>
@@ -44,8 +43,9 @@ const DetailDog = () => {
               <h4>Breed for: {breedDetail?.bred_for}</h4>
             )}
             <h4>Life span: {breedDetail?.life_span}</h4>
-            <h4>Weight: {breedDetail?.weight?.imperial}</h4>
-            <h4>Height: {breedDetail?.height?.imperial}</h4>
+            <h4>Weight: {breedDetail?.weight}</h4>
+            <h4>Height: {breedDetail?.height}</h4>
+
             <h4>Temperaments: {breedDetail?.temperament}</h4>
           </div>
         </div>

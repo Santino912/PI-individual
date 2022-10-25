@@ -90,6 +90,14 @@ const sortFunction = (a, b) => {
   }
 };
 
-/* export function filterBreedsGroups(arr, breed) {
-  return !breed ? arr : arr.filter((dogs) => dogs.breed_group === breed);
-} */
+export const arrTemperamentsToStr = (breed) => {
+  if (Array.isArray(breed.Temperaments)) {
+    let temperament = breed.Temperaments.map((t) => t.name);
+    temperament = temperament.join(", ");
+    return {
+      ...breed,
+      temperament,
+    };
+  }
+  return breed;
+};
