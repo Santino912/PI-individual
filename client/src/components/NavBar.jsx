@@ -14,25 +14,29 @@ export default function NavBar() {
           <h1 style={{ margin: "10px" }}>dogFinder</h1>
         </Link>
       </div>
-      <div className={style.navBarCreateDog}>
-        <Link style={{ color: "var(--light-color)" }} to={"/home/create"}>
-          <h3>Create dog</h3>
-        </Link>
-      </div>
-      <div className={style.navBarSearch}>
-        <input
-          type="text"
-          onChange={(e) => {
-            dispatch(filterName(e.target.value));
-            dispatch(resetPage());
-          }}
-          placeholder="SearchDog.."
-          style={{ margin: "10px" }}
-          value={state.strFilter.str}
-        />
-        <button type="submit" value="Search">
-          Search
-        </button>
+      <div className={style.navBarContainer}>
+        <div className={style.navBarCreateDog}>
+          <Link style={{ color: "var(--light-color)" }} to={"/home/create"}>
+            <h3>Create dog</h3>
+          </Link>
+        </div>
+
+        <div className={style.navBarSearch}>
+          <input
+            className={style.searchInput}
+            type="text"
+            onChange={(e) => {
+              dispatch(filterName(e.target.value));
+              dispatch(resetPage());
+            }}
+            placeholder="SearchDog.."
+            style={{ margin: "10px" }}
+            value={state.strFilter.str}
+          />
+          <button type="submit" value="Search">
+            Search
+          </button>
+        </div>
       </div>
     </div>
   );
