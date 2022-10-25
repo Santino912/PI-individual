@@ -12,7 +12,6 @@ import Temps from "../componentsShorts/Temps";
 import { Loading } from "../componentsShorts/Loading";
 import Breeds from "../componentsShorts/Breeds";
 
-
 const Home = () => {
   const [loading, setLoading] = useState(false);
   const [index, setIndex] = useState(0);
@@ -38,7 +37,6 @@ const Home = () => {
     )
   );
   const allBreedsGroups = useSelector((state) => state.breedsGroups);
-
   useEffect(() => {
     setLoading(true);
     dispatch(allBreeds());
@@ -70,7 +68,6 @@ const Home = () => {
             ))}
           </select>
         </div>
-        <SelectMaterial>dwadwadf</SelectMaterial>
         <div className={style.filterTemperaments}>
           <h4>Filter temperament by: </h4>
           <select

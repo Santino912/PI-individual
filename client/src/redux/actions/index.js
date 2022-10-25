@@ -1,4 +1,4 @@
-import { strToRegEx, equalizeArr } from "../../utils";
+import { strToRegEx, equalizeArr, arrTemperamentsToStr } from "../../utils";
 
 export const FETCH_ALL_BREEDS = "FETCH_ALL_BREEDS";
 export const FETCH_ONE_BREED = "FETCH_ONE_BREED";
@@ -35,7 +35,9 @@ export function fetchOneDetail(breedId) {
   return function (dispatch) {
     return fetch(`http://localhost:3001/dogs/${breedId}`)
       .then((res) => res.json())
-      .then((data) => dispatch({ type: FETCH_ONE_BREED, payload: data }));
+      .then((data) =>
+        dispatch({ type: FETCH_ONE_BREED, payload: arrTemperamentsToStr(data) })
+      );
   };
 }
 

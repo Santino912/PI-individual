@@ -31,18 +31,3 @@ module.exports = {
     return `${aStr}-${bStr}`;
   },
 };
-
-/* arr.map(async (name) => {
-  let findTemp = await Temperaments.findOne({
-    where: {
-      name,
-    },
-  });
-  console.log(findTemp, { name }, await Temperaments.findAll());
-  if (findTemp == null) {
-    await Temperaments.create({
-      name,
-    });
-  }
-  return;
-}); */

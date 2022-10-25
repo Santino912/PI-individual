@@ -10,12 +10,12 @@ export default function NavBar() {
   return (
     <div className={style.navBarDiv}>
       <div className={style.navBarTitle}>
-        <Link style={{ color: "white" }} to="/home">
+        <Link style={{ color: "var(--light-color)" }} to="/home">
           <h1 style={{ margin: "10px" }}>dogFinder</h1>
         </Link>
       </div>
       <div className={style.navBarCreateDog}>
-        <Link style={{ color: "white" }} to={"/home/create"}>
+        <Link style={{ color: "var(--light-color)" }} to={"/home/create"}>
           <h3>Create dog</h3>
         </Link>
       </div>

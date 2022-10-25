@@ -30,6 +30,12 @@ module.exports = (sequelize) => {
       life_span: {
         type: DataTypes.STRING,
       },
+      bred_for: {
+        type: DataTypes.STRING,
+      },
+      breed_group: {
+        type: DataTypes.STRING,
+      },
     },
     {
       timestamps: false,
