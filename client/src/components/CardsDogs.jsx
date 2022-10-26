@@ -19,7 +19,7 @@ const CardsDogs = ({ dog }) => {
         <h2>{dog?.name}</h2>
         <h4>Life span: {dog.life_span}</h4>
         <h4>Weight: {dog.weight}</h4>
-        <h4>Temperaments: {dog.temperament}</h4>
+        <h4 className={style.text}>Temperaments: {dog.temperament}</h4>
       </div>
     </Link>
   );

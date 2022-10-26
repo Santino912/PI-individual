@@ -11,17 +11,16 @@ export default function NavBar() {
     <div className={style.navBarDiv}>
       <div className={style.navBarTitle}>
         <Link style={{ color: "var(--light-color)" }} to="/home">
-          <h1 style={{ margin: "10px" }}>dogFinder</h1>
+          <h1 style={{ margin: "10px", fontSize: "calc(10px + 1vw)" }}>
+            dogFinder
+          </h1>
         </Link>
       </div>
       <div className={style.navBarContainer}>
         <div className={style.navBarCreateDog}>
-          <Link style={{ color: "var(--light-color)" }} to={"/home/create"}>
+          <Link className={style.link} to={"/home/create"}>
             <h3>Create dog</h3>
           </Link>
-        </div>
-
-        <div className={style.navBarSearch}>
           <input
             className={style.searchInput}
             type="text"
@@ -30,10 +29,9 @@ export default function NavBar() {
               dispatch(resetPage());
             }}
             placeholder="SearchDog.."
-            style={{ margin: "10px" }}
             value={state.strFilter.str}
           />
-          <button type="submit" value="Search">
+          <button type="submit" value="Search" className={style.button}>
             Search
           </button>
         </div>

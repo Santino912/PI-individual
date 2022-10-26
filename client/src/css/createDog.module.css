@@ -2,7 +2,7 @@
   width: 100vw;
   height: 100vh;
   background-color: var(--principal-darkcolor);
-  padding: 100px 20px 20px 20px;
+  padding: 2vh 2vw;
 }
 
 .divContainer {
@@ -15,10 +15,53 @@
   background-color: var(--light-color);
   color: var(--principal-lightcolor);
   padding: 30px;
+  min-height: 700px;
 }
 
 .inputContainer {
   display: flex;
   height: auto;
   align-items: center;
+  padding: 1vh;
+  flex-wrap: wrap;
+}
+
+.divContainerAll {
+  width: 100%;
+  height: auto;
+  background-color: var(--dark-color);
+  padding: 25px;
+}
+
+.selectFilter {
+  height: 20px;
+  border-radius: 10px;
+  width: 100px;
+}
+
+.inputStyle {
+  height: 20px;
+  color: black;
+  border-radius: 10px;
+  min-width: 100px;
+  width: calc(20px + 10vw);
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.button {
+  background-color: var(--principal-darkcolor);
+  color: var(--light-color);
+  border: 0;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: 700;
+}
+
+.temperamentsDiv {
+  display: flex;
+  flex-direction: row;
+  overflow: scroll;
+  height: 360px;
+  width: 100%;
 }

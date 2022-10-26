@@ -70,123 +70,128 @@ const CreateDogs = () => {
   };
   return (
     <div className={style.divCreateDog}>
-      <form onSubmit={(e) => handleSubmit(e)} className={style.divContainer}>
-        <div className={style.inputContainer}>
-          <h3 className={style.nameInput}>Image:</h3>
-          <input
-            style={{ width: "300px", height: "25px" }}
-            onChange={(e) => handleChange(e)}
-            type="text"
-            name="img"
-            value={object.img}
-            placeholder="Url here"
-            required
-          />
-        </div>
+      <div className={style.divContainerAll}>
+        <form onSubmit={(e) => handleSubmit(e)} className={style.divContainer}>
+          <div className={style.inputContainer}>
+            <h3 className={style.nameInput}>Image:</h3>
+            <input
+              className={style.inputStyle}
+              onChange={(e) => handleChange(e)}
+              type="text"
+              name="img"
+              value={object.img}
+              placeholder="Url here"
+              required
+            />
+          </div>
 
-        <div className={style.inputContainer}>
-          <h3 className={style.nameInput}>Name:</h3>
-          <input
-            style={{ width: "300px", height: "25px" }}
-            onChange={(e) => handleChange(e)}
-            type="text"
-            name="name"
-            value={object.name}
-            placeholder="Name here"
-            required
-          />
-        </div>
+          <div className={style.inputContainer}>
+            <h3 className={style.nameInput}>Name:</h3>
+            <input
+              className={style.inputStyle}
+              onChange={(e) => handleChange(e)}
+              type="text"
+              name="name"
+              value={object.name}
+              placeholder="Name here"
+              required
+            />
+          </div>
 
-        <div className={style.inputContainer}>
-          <h3 className={style.nameInput}>Weight:</h3>
-          <input
-            style={{ width: "150px", height: "25px" }}
-            onChange={(e) => handleChange(e)}
-            type="number"
-            name="weightMax"
-            value={object.weightMax}
-            placeholder="Max weight here"
-            required
-          />
-          <h3 className={style.nameInput}>-</h3>
-          <input
-            style={{ width: "150px", height: "25px" }}
-            onChange={(e) => handleChange(e)}
-            type="number"
-            name="weightMin"
-            value={object.weightMin}
-            placeholder="Min weight here"
-            required
-          />
-        </div>
+          <div className={style.inputContainer}>
+            <h3 className={style.nameInput}>Weight:</h3>
+            <input
+              className={style.inputStyle}
+              onChange={(e) => handleChange(e)}
+              type="number"
+              name="weightMax"
+              value={object.weightMax}
+              placeholder="Max weight here"
+              required
+            />
+            <h3 className={style.nameInput}>-</h3>
+            <input
+              className={style.inputStyle}
+              onChange={(e) => handleChange(e)}
+              type="number"
+              name="weightMin"
+              value={object.weightMin}
+              placeholder="Min weight here"
+              required
+            />
+          </div>
 
-        <div className={style.inputContainer}>
-          <h3 className={style.nameInput}>Height:</h3>
-          <input
-            style={{ width: "300px", height: "25px" }}
-            onChange={(e) => handleChange(e)}
-            type="number"
-            name="height"
-            value={object.height}
-            placeholder="Height here"
-            required
-          />
-        </div>
+          <div className={style.inputContainer}>
+            <h3 className={style.nameInput}>Height:</h3>
+            <input
+              className={style.inputStyle}
+              onChange={(e) => handleChange(e)}
+              type="number"
+              name="height"
+              value={object.height}
+              placeholder="Height here"
+              required
+            />
+          </div>
 
-        <div className={style.inputContainer}>
-          <h3 className={style.nameInput}>Life span:</h3>
-          <input
-            style={{ width: "300px", height: "25px" }}
-            onChange={(e) => handleChange(e)}
-            type="text"
-            name="life_span"
-            value={object.life_span}
-            placeholder="Life span here"
-            required
-          />
-        </div>
+          <div className={style.inputContainer}>
+            <h3 className={style.nameInput}>Life span:</h3>
+            <input
+              className={style.inputStyle}
+              onChange={(e) => handleChange(e)}
+              type="text"
+              name="life_span"
+              value={object.life_span}
+              placeholder="Life span here"
+              required
+            />
+          </div>
 
-        <div className={style.inputContainer}>
-          <h3 className={style.nameInput}>Temperaments:</h3>
-          <select
-            style={{ width: "100px", height: "20px" }}
-            defaultValue="default"
-            onChange={(e) => handleSelect(e.target.value)}
-            name="temperament"
-          >
-            <option
-              style={{ color: "gray", width: "10px", height: "40px" }}
-              value="default"
-              disabled
+          <div className={style.inputContainer}>
+            <h3 className={style.nameInput}>Temperaments:</h3>
+            <select
+              className={style.selectFilter}
+              defaultValue="default"
+              onChange={(e) => handleSelect(e.target.value)}
+              name="temperament"
             >
-              Default
-            </option>
-            {allTemperaments?.map((t, i) => (
-              <OptionsVerif
+              <option
+                style={{
+                  color: "white",
+                  width: "10px",
+                  height: "40px",
+                  backgroundColor: "var(--dark-color)",
+                }}
+                value="default"
+                disabled
+              >
+                Default
+              </option>
+              {allTemperaments?.map((t, i) => (
+                <OptionsVerif
+                  key={i}
+                  temperament={t}
+                  selectTemperaments={temperaments}
+                />
+              ))}
+            </select>
+          </div>
+
+          <div className={style.temperamentsDiv}>
+            {temperaments.map((temperament, i) => (
+              <ButtonsTemperaments
                 key={i}
-                temperament={t}
-                selectTemperaments={temperaments}
+                deleteTemperament={deleteTemperament}
+                temperament={temperament}
               />
             ))}
-          </select>
-        </div>
+          </div>
 
-        <div
-          style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}
-        >
-          {temperaments.map((temperament, i) => (
-            <ButtonsTemperaments
-              key={i}
-              deleteTemperament={deleteTemperament}
-              temperament={temperament}
-            />
-          ))}
-        </div>
-
-        <button type="submit" value="Submit">
-          Submit
-        </button>
-      </form>
+          <button className={style.button} type="submit" value="Submit">
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
