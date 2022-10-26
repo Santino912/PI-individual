@@ -25,7 +25,6 @@
   flex-wrap: wrap;
   gap: 20px;
   background-color: var(--light-color);
-
   padding: 80px 0;
 }
 
@@ -47,7 +46,6 @@
 
 .button {
   background-color: var(--light-color);
-
   width: 100px;
   height: 50px;
   transition: all 0.5s;
@@ -56,11 +54,9 @@
   cursor: pointer;
 }
 .button:hover {
-
   background-color: var(--dark-color);
   border-radius: 10px;
   transition: all 0.5s;
-
 }
 
 .filterTemperaments {
@@ -85,4 +81,3 @@
   border-radius: 10px;
   width: 100px;
 }
-
