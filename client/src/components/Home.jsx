@@ -134,9 +134,7 @@ const Home = () => {
             <CardsDogs key={i} dog={dog} />
           ))
         ) : (
-          <h1 style={{ color: "var(--principal-darkcolor)" }}>
-            Can´t found dogs with the features
-          </h1>
+          <h1 style={{ color: "var(--principal-darkcolor)" }}>No dogs found</h1>
         )}
       </div>
 
