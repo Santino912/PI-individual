@@ -4,8 +4,12 @@ const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_DATA } = process.env;
 
-const sequelize = new Sequelize(`${DB_DATA}`, {});
+const sequelize = new Sequelize(`${DB_NAME}`, `${DB_USER}`, `${DB_PASSWORD}`, {
+  host: "https://dogfinder.onrender.com",
+  dialect: "postgres",
+});
 const basename = path.basename(__filename);
+console.log(DB_DATA);
 const modelDefiners = [];
 
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
