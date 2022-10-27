@@ -54,7 +54,7 @@ router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     let breedsFetched = await axios
-      .get("http://localhost:3001/dogs")
+      .get("https://dogfinder.onrender.com")
       .then((data) => data);
     breedsFetched = await breedsFetched.data.find((breed) => breed.id == id);
     if (!breedsFetched) {
