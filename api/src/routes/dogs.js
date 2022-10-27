@@ -1,12 +1,9 @@
 const { Router } = require("express");
 const { Breeds, Temperaments } = require("../db");
 const router = Router();
-const { dogsApiFetch, twoStrToOneString } = require("../utils/addData");
+const { twoStrToOneString } = require("../utils/addData");
 const axios = require("axios");
 const { stringToArr } = require("../utils/addData");
-
-//add temperaments to DB
-dogsApiFetch();
 
 router.get("/", async (req, res) => {
   const { name } = req.query;
