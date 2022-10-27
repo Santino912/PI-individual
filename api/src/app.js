@@ -3,10 +3,12 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const route = require("./routes/index.js");
-
+const { dogsApiFetch } = require("./utils/addData");
 require("./db.js");
 
 const server = express();
+//add temperaments to DB
+dogsApiFetch();
 
 server.name = "API";
 

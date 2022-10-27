@@ -3,7 +3,6 @@ const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
-const { dogsApiFetch } = require("./utils/addData");
 
 const sequelize = new Sequelize({
   database: DB_NAME,
@@ -60,8 +59,6 @@ Temperaments.belongsToMany(Breeds, {
   through: "BreedTemperaments",
 });
 
-//add temperaments to DB
-dogsApiFetch();
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize, // para importar la conexión { conn } = require('./db.js');
