@@ -4,12 +4,28 @@ const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_DATA } = process.env;
 
-const sequelize = new Sequelize(`${DB_NAME}`, `${DB_USER}`, `${DB_PASSWORD}`, {
-  host: `${DB_HOST}`,
+const sequelize = new Sequelize({
+  database: DB_NAME,
   dialect: "postgres",
+  host: DB_HOST,
+  port: 5432,
+  username: DB_USER,
+  password: DB_PASSWORD,
+  pool: {
+    max: 3,
+    min: 1,
+    idle: 10000,
+  },
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+    keepAlive: true,
+  },
+  ssl: true,
 });
 const basename = path.basename(__filename);
-console.log(DB_DATA);
 const modelDefiners = [];
 
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
