@@ -13,14 +13,13 @@ export const DELETE_TEMPERAMENTS = "DELETE_TEMPERAMENTS";
 export const SORT_ARR_ACTION = "SORT_ARR_ACTION";
 export const RESET_BREED_DETAIL = "RESET_BREED_DETAIL";
 
-
 export function allBreeds() {
   let dataTemperaments;
-  fetch("http://localhost:3001/temperaments")
+  fetch("https://dogfinder.onrender.com/temperaments")
     .then((res) => res.json())
     .then((data) => (dataTemperaments = data));
   return function (dispatch) {
-    return fetch("http://localhost:3001/dogs")
+    return fetch("https://dogfinder.onrender.com/dogs")
       .then((res) => res.json())
       .then((data) =>
         dispatch({
@@ -33,7 +32,7 @@ export function allBreeds() {
 
 export function fetchOneDetail(breedId) {
   return function (dispatch) {
-    return fetch(`http://localhost:3001/dogs/${breedId}`)
+    return fetch(`https://dogfinder.onrender.com/dogs/${breedId}`)
       .then((res) => res.json())
       .then((data) =>
         dispatch({ type: FETCH_ONE_BREED, payload: arrTemperamentsToStr(data) })
@@ -71,5 +70,4 @@ export function sortArrAction(payload) {
 
 export function resetDetailBreed() {
   return { type: RESET_BREED_DETAIL };
-
 }

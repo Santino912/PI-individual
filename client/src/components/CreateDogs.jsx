@@ -50,7 +50,7 @@ const CreateDogs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/dogs", { ...object })
+      .post("https://dogfinder.onrender.com/dogs", { ...object })
       .then(function (response) {
         console.log(response);
       })
