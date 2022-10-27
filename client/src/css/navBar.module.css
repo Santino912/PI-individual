@@ -78,3 +78,8 @@
   border-radius: 5px;
   transition: all 0.2s;
 }
+
+.link:hover {
+  background-color: var(--principal-lightcolor);
+  transition: all 0.2s;
+}
