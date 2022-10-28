@@ -11,11 +11,6 @@ const sequelize = new Sequelize({
   port: 5432,
   username: DB_USER,
   password: DB_PASSWORD,
-  pool: {
-    max: 3,
-    min: 1,
-    idle: 10000,
-  },
 });
 const basename = path.basename(__filename);
 const modelDefiners = [];
