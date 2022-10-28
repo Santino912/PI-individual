@@ -6,7 +6,7 @@ const axios = require("axios");
 const { stringToArr } = require("../utils/addData");
 
 //add temperaments to DB
-//dogsApiFetch();
+dogsApiFetch();
 
 router.get("/", async (req, res) => {
   const { name } = req.query;
