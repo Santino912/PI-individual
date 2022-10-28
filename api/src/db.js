@@ -11,14 +11,6 @@ const sequelize = new Sequelize({
   port: 5432,
   username: DB_USER,
   password: DB_PASSWORD,
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false,
-    },
-    keepAlive: true,
-  },
-  ssl: true,
 });
 const basename = path.basename(__filename);
 const modelDefiners = [];
