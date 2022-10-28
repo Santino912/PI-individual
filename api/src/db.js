@@ -11,9 +11,6 @@ const sequelize = new Sequelize({
   port: 5432,
   username: DB_USER,
   password: DB_PASSWORD,
-  dialectOptions: {
-    keepAlive: true,
-  },
 });
 const basename = path.basename(__filename);
 const modelDefiners = [];
