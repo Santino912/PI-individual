@@ -9,7 +9,6 @@ import {
   RESET_ALL,
   SORT_ARR_ACTION,
   RESET_BREED_DETAIL,
-
 } from "../actions";
 
 let base = {
@@ -42,7 +41,7 @@ const reducer = (state = initialState, action) => {
     case FETCH_ONE_BREED:
       return {
         ...state,
-        breedDetail: verifTemperaments(action.payload),
+        breedDetail: action.payload,
       };
     case FILTER_NAME:
       return {
@@ -75,7 +74,6 @@ const reducer = (state = initialState, action) => {
       };
 
     case RESET_BREED_DETAIL:
-
       return {
         ...state,
         breedDetail: {},

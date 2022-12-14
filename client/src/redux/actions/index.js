@@ -1,4 +1,4 @@
-import { strToRegEx, arrTemperamentsToStr } from "../../utils";
+import { strToRegEx } from "../../utils";
 
 export const FETCH_ALL_BREEDS = "FETCH_ALL_BREEDS";
 export const FETCH_ONE_BREED = "FETCH_ONE_BREED";
@@ -34,9 +34,7 @@ export function fetchOneDetail(breedId) {
   return function (dispatch) {
     return fetch(`https://dogfinderapi.onrender.com/breeds/${breedId}`)
       .then((res) => res.json())
-      .then((data) =>
-        dispatch({ type: FETCH_ONE_BREED, payload: arrTemperamentsToStr(data) })
-      );
+      .then((data) => dispatch({ type: FETCH_ONE_BREED, payload: data }));
   };
 }
 

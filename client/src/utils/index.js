@@ -63,14 +63,6 @@ export function sortArrBy(arr, sort) {
   }
 }
 
-export function verifTemperaments(breed) {
-  if (Array.isArray(breed?.Temperaments)) {
-    breed.temperament = breed.Temperaments.map((e) => e.name).join(", ");
-    return breed;
-  }
-  return breed;
-}
-
 //Funciones para uso local
 
 const sortFunction = (a, b) => {
