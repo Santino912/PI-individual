@@ -85,7 +85,7 @@ export const concatAllBreeds = async (dogApiArr) => {
 };
 
 export const fetchAllBreeds = async () => {
-  let breeds = await axios("http://localhost:3001/breeds").then(
+  let breeds = await axios(`https://dogfinderapi.onrender.com/breeds`).then(
     (res) => res.data
   );
   return breeds;
