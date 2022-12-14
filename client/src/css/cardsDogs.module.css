@@ -93,5 +93,5 @@
 
 .text {
   height: 120px;
-  text-overflow: ellipsis;
+  overflow: auto;
 }

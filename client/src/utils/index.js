@@ -11,18 +11,6 @@ export function stringToArr(arr) {
   return arr.split(", ") ? arr.split(", ") : true;
 }
 
-export function equalizeArr(arr) {
-  let filter = arr.map((act) => {
-    let temps = act?.Temperaments;
-    if (Array.isArray(temps)) {
-      act.temperament = act.Temperaments.map((e) => e.name).join(", ");
-      act.madeIn = "local";
-    }
-    return act;
-  });
-  return filter;
-}
-
 export function filterAll(
   regex,
   name,

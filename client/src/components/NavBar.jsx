@@ -31,9 +31,6 @@ export default function NavBar() {
             placeholder="SearchDog.."
             value={state.strFilter.str}
           />
-          <button type="submit" value="Search" className={style.button}>
-            Search
-          </button>
         </div>
       </div>
     </div>

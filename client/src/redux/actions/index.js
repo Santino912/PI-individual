@@ -1,4 +1,4 @@
-import { strToRegEx, equalizeArr, arrTemperamentsToStr } from "../../utils";
+import { strToRegEx, arrTemperamentsToStr } from "../../utils";
 
 export const FETCH_ALL_BREEDS = "FETCH_ALL_BREEDS";
 export const FETCH_ONE_BREED = "FETCH_ONE_BREED";
@@ -15,16 +15,16 @@ export const RESET_BREED_DETAIL = "RESET_BREED_DETAIL";
 
 export function allBreeds() {
   let dataTemperaments;
-  fetch("https://dogfinder.onrender.com/temperaments")
+  fetch("http://localhost:3001/temperaments")
     .then((res) => res.json())
     .then((data) => (dataTemperaments = data));
   return function (dispatch) {
-    return fetch("https://dogfinder.onrender.com/dogs")
+    return fetch("http://localhost:3001/breeds")
       .then((res) => res.json())
       .then((data) =>
         dispatch({
           type: FETCH_ALL_BREEDS,
-          payload: { data: equalizeArr(data), dataTemperaments },
+          payload: { data: data, dataTemperaments },
         })
       );
   };
@@ -32,7 +32,7 @@ export function allBreeds() {
 
 export function fetchOneDetail(breedId) {
   return function (dispatch) {
-    return fetch(`https://dogfinder.onrender.com/dogs/${breedId}`)
+    return fetch(`http://localhost:3001/breeds/${breedId}`)
       .then((res) => res.json())
       .then((data) =>
         dispatch({ type: FETCH_ONE_BREED, payload: arrTemperamentsToStr(data) })
