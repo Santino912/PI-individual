@@ -8,8 +8,8 @@ const CardsDogs = ({ dog }) => {
   const dispatch = useDispatch();
   return (
     <Link
-      onClick={() => dispatch(fetchOneDetail(dog.id))}
-      to={`/home/detail/${dog.id}`}
+      onClick={() => dispatch(fetchOneDetail(dog._id))}
+      to={`/home/detail/${dog._id}`}
     >
       <div className={style.card}>
         <div className={style.blob}></div>

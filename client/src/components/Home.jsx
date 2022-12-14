@@ -83,7 +83,7 @@ const Home = () => {
             >
               None
             </option>
-            {allTemperaments.map((t, i) => (
+            {allTemperaments?.map((t, i) => (
               <Temps key={i} temperament={t} />
             ))}
           </select>

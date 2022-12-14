@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { allBreeds } from "../redux/actions";
 import ButtonsTemperaments from "../componentsShorts/ButtonsTemperaments";
 import style from "../css/createDog.module.css";
-import { allBreeds } from "../redux/actions";
 import axios from "axios";
 import OptionsVerif from "../componentsShorts/OptionsVerif";
 
 const CreateDogs = () => {
-  const [temperaments, setTemperaments] = useState([]);
   const [object, setObject] = useState({
     name: "",
     weightMin: "",
     height: "",
     weightMax: "",
-    life_span: "",
+    lifeSpan: "",
     img: "",
-    temperament: "",
+    temperamentsArr: [],
   });
 
   const allTemperaments = useSelector((state) => state.allTemperaments);
@@ -30,42 +29,38 @@ const CreateDogs = () => {
   };
 
   const handleSelect = (e) => {
-    setTemperaments([...temperaments, e]);
     setObject({
       ...object,
-      temperament: !object.temperament ? `${e}` : `${object.temperament}, ${e}`,
+      temperamentsArr: [...object.temperamentsArr, e],
     });
   };
   const deleteTemperament = (e) => {
-    setTemperaments(temperaments.filter((t) => t !== e));
     setObject({
       ...object,
-      temperament: object.temperament
-        .split(", ")
-        .filter((act) => act !== e)
-        .join(", "),
+      temperamentsArr: object.temperamentsArr.filter(
+        (temperament) => temperament !== e
+      ),
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios
-      .post("https://dogfinder.onrender.com/dogs", { ...object })
+      .post("http://localhost:3001/breeds", { ...object })
       .then(function (response) {
         console.log(response);
       })
       .catch(function (error) {
         console.log(error);
       });
-    setTemperaments([]);
     setObject({
       name: "",
       weightMin: "",
       height: "",
       weightMax: "",
-      life_span: "",
+      lifeSpan: "",
       img: "",
-      temperament: "",
+      temperamentsArr: [],
     });
   };
   return (
@@ -139,9 +134,9 @@ const CreateDogs = () => {
             <input
               className={style.inputStyle}
               onChange={(e) => handleChange(e)}
-              type="text"
-              name="life_span"
-              value={object.life_span}
+              type="number"
+              name="lifeSpan"
+              value={object.lifeSpan}
               placeholder="Life span here"
               required
             />
@@ -171,14 +166,14 @@ const CreateDogs = () => {
                 <OptionsVerif
                   key={i}
                   temperament={t}
-                  selectTemperaments={temperaments}
+                  selectTemperaments={object.temperamentsArr}
                 />
               ))}
             </select>
           </div>
 
           <div className={style.temperamentsDiv}>
-            {temperaments.map((temperament, i) => (
+            {object?.temperamentsArr.map((temperament, i) => (
               <ButtonsTemperaments
                 key={i}
                 deleteTemperament={deleteTemperament}

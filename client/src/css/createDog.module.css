@@ -61,7 +61,8 @@
 .temperamentsDiv {
   display: flex;
   flex-direction: row;
-  overflow: scroll;
+  overflow: auto;
+  flex-wrap: wrap;
   height: 360px;
   width: 100%;
 }
