@@ -24,14 +24,17 @@ router.get("/", async (_req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
-  const { id } = req.params;
+router.get("/:_id", async (req, res) => {
+  const { _id } = req.params;
   try {
-    let allBreeds = await fetchAllBreeds();
-
-    let breedRequiered = allBreeds.find((breed) => breed._id == id);
-
-    res.send(breedRequiered);
+    let breedsFetched = await apiDogRequest();
+    if (breedsFetched.some((breed) => breed._id == _id)) {
+      let breedFinded = breedsFetched.find((breed) => breed._id == _id);
+      res.send(breedFinded);
+    } else {
+      let breedFinded = await Breed.findOne({ _id });
+      res.send(breedFinded);
+    }
   } catch (err) {
     res.status(404).send(err);
   }
