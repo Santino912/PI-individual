@@ -63,7 +63,7 @@ export function sortArrBy(arr, sort) {
   }
 }
 
-//Funciones para uso local
+//Local Use
 
 const sortFunction = (a, b) => {
   let aValue = parseInt(
