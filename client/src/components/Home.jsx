@@ -9,11 +9,11 @@ import {
 } from "../redux/actions";
 import { cutArr, filterAll } from "../utils";
 import Temps from "../componentsShorts/Temps";
-import { Loading } from "../componentsShorts/Loading";
+import Loading from "./Loading";
 import Breeds from "../componentsShorts/Breeds";
 
 const Home = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [index, setIndex] = useState(0);
   const [group, setGroup] = useState("");
   const [madeIn, setMadeIn] = useState("");
@@ -38,9 +38,7 @@ const Home = () => {
   );
   const allBreedsGroups = useSelector((state) => state.breedsGroups);
   useEffect(() => {
-    setLoading(true);
     dispatch(allBreeds());
-    setLoading(false);
   }, [dispatch]);
 
   const handleIndex = (i) => {
@@ -49,7 +47,6 @@ const Home = () => {
 
   return (
     <div className={style.divHome}>
-      {loading && <Loading />}
       <div className={style.optionsFilter}>
         <div className={style.filterBreed}>
           <h4>Filter by breed:</h4>
@@ -127,10 +124,11 @@ const Home = () => {
           </select>
         </div>
       </div>
-
       <div className={style.divCards}>
-        {cutArr(stateBreeds, index).length > 0 ? (
-          cutArr(stateBreeds, index).map((dog, i) => (
+        {loading && stateBreeds?.length < 1 ? (
+          <Loading />
+        ) : cutArr(stateBreeds, index)?.length > 0 ? (
+          cutArr(stateBreeds, index)?.map((dog, i) => (
             <CardsDogs key={i} dog={dog} />
           ))
         ) : (

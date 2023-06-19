@@ -29,6 +29,7 @@ export function filterAll(
     );
   let dogGroupBreed = group.length > 0 ? group === dogGroup : true;
   let BooleanMadeIn = madeIn.length > 0 ? madeIn === madeInDog : true;
+
   return regexTest && dogsTempsBoolean && dogGroupBreed && BooleanMadeIn;
 }
 

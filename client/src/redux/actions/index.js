@@ -13,7 +13,7 @@ export const DELETE_TEMPERAMENTS = "DELETE_TEMPERAMENTS";
 export const SORT_ARR_ACTION = "SORT_ARR_ACTION";
 export const RESET_BREED_DETAIL = "RESET_BREED_DETAIL";
 
-export function allBreeds() {
+export function allBreeds(setLoading) {
   let dataTemperaments;
   fetch(`https://dogfinderapi.onrender.com/temperaments`)
     .then((res) => res.json())
