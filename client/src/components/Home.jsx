@@ -126,7 +126,6 @@ const Home = () => {
         </div>
       </div>
       <div className={style.divCards}>
-        {console.log(loading)}
         {loading || stateBreeds?.length < 1 ? (
           <Loading />
         ) : cutArr(stateBreeds, index)?.length > 0 ? (
