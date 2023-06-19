@@ -39,6 +39,7 @@ const Home = () => {
   const allBreedsGroups = useSelector((state) => state.breedsGroups);
   useEffect(() => {
     dispatch(allBreeds());
+    setLoading(false);
   }, [dispatch]);
 
   const handleIndex = (i) => {
@@ -125,7 +126,8 @@ const Home = () => {
         </div>
       </div>
       <div className={style.divCards}>
-        {loading && stateBreeds?.length < 1 ? (
+        {console.log(loading)}
+        {loading || stateBreeds?.length < 1 ? (
           <Loading />
         ) : cutArr(stateBreeds, index)?.length > 0 ? (
           cutArr(stateBreeds, index)?.map((dog, i) => (
