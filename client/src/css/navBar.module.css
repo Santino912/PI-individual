@@ -67,16 +67,16 @@
 }
 
 .link {
-  width: calc(210px + 0.7vw);
-  min-width: 120px;
-  font-size: calc(12px + 0.3vw);
-  color: var(--light-color);
   background-color: var(--principal-darkcolor);
   border: 0;
-  padding: 10px;
-  font-weight: 700;
   border-radius: 5px;
+  color: var(--light-color);
+  font-size: calc(10px + 0.1vw);
+  font-weight: 700;
+  min-width: 120px;
+  padding: 10px;
   transition: all 0.2s;
+  width: calc(100px + 0.1vw);
 }
 
 .link:hover {
