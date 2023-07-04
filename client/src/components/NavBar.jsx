@@ -12,7 +12,7 @@ export default function NavBar() {
       <div className={style.navBarTitle}>
         <Link style={{ color: "var(--light-color)" }} to="/home">
           <h1 style={{ margin: "10px", fontSize: "calc(10px + 1vw)" }}>
-            dogFinder
+            DogFinder
           </h1>
         </Link>
       </div>

@@ -7,7 +7,7 @@ const LandingPage = () => {
     <div style={{ position: "fixed", width: "100%", height: "100%" }}>
       <div className={style.titleButton}>
         <div className={style.containerLandingPage}>
-          <h1 className={style.title}>dogFinder</h1>
+          <h1 className={style.title}>DogFinder</h1>
         </div>
         <div className={style.containerLandingPage}>
           <Link to="/home">
