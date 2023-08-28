@@ -15,11 +15,11 @@ export const RESET_BREED_DETAIL = "RESET_BREED_DETAIL";
 
 export function allBreeds(setLoading) {
   let dataTemperaments;
-  fetch(`http://localhost:3001/temperaments`)
+  fetch(`https://socialsound-2.onrender.com/temperaments`)
     .then((res) => res.json())
     .then((data) => (dataTemperaments = data));
   return function (dispatch) {
-    return fetch(`http://localhost:3001/breeds`)
+    return fetch(`https://socialsound-2.onrender.com/breeds`)
       .then((res) => res.json())
       .then((data) =>
         dispatch({
@@ -32,7 +32,7 @@ export function allBreeds(setLoading) {
 
 export function fetchOneDetail(breedId) {
   return function (dispatch) {
-    return fetch(`http://localhost:3001/breeds/${breedId}`)
+    return fetch(`https://socialsound-2.onrender.com/breeds/${breedId}`)
       .then((res) => res.json())
       .then((data) => dispatch({ type: FETCH_ONE_BREED, payload: data }));
   };

@@ -1,10 +1,7 @@
 import { Router } from "express";
 import Breed from "../models/Breed.js";
 import {
-  apiDogRequest,
   breedNameExist,
-  concatAllBreeds,
-  fetchAllBreeds,
   lifeSpanYears,
   searchTemperamentInDB,
   someDataUndefined,
@@ -16,8 +13,7 @@ const router = Router();
 
 router.get("/", async (_req, res) => {
   try {
-    let breedsFetched = await apiDogRequest();
-    let allBreeds = await concatAllBreeds(breedsFetched);
+    let allBreeds = await Breed.find();
     return res.send(allBreeds);
   } catch (err) {
     return res.status(404).send(err);
@@ -27,14 +23,8 @@ router.get("/", async (_req, res) => {
 router.get("/:_id", async (req, res) => {
   const { _id } = req.params;
   try {
-    let breedsFetched = await apiDogRequest();
-    if (breedsFetched.some((breed) => breed._id == _id)) {
-      let breedFinded = breedsFetched.find((breed) => breed._id == _id);
-      res.send(breedFinded);
-    } else {
-      let breedFinded = await Breed.findOne({ _id });
-      res.send(breedFinded);
-    }
+    let breedFinded = await Breed.findOne({ _id });
+    res.send(breedFinded);
   } catch (err) {
     res.status(404).send(err);
   }
@@ -44,7 +34,7 @@ router.post("/", async (req, res) => {
   const { name, weightMax, weightMin, height, lifeSpan, temperamentsArr, img } =
     req.body;
   if (someDataUndefined(req.body)) {
-    return res.status(404).send("empty body");
+    return res.status(404).send("Some data is not defined");
   }
   if (await breedNameExist(name)) {
     return res.status(404).send("Breed name already exist");
@@ -57,7 +47,6 @@ router.post("/", async (req, res) => {
       async (value) => await searchTemperamentInDB(value)
     );
     temperaments = await Promise.all(temperaments);
-    console.log(temperaments);
     let createdBreed = await Breed.create({
       name,
       weight,

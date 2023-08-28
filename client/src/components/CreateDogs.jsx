@@ -46,7 +46,7 @@ const CreateDogs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:3001/breeds`, { ...object })
+      .post(`https://socialsound-2.onrender.com/breeds`, { ...object })
       .then(function (response) {
         console.log(response);
       })

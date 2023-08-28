@@ -62,16 +62,14 @@ export const apiDogRequest = async () => {
     .get("https://api.thedogapi.com/v1/breeds")
     .then((res) => res.data);
   breedsFetched = breedsFetched.map((breed) => {
-    const { name, life_span, breed_group, temperament, image, id } = breed;
+    const { name, life_span, breed_group, temperament } = breed;
     return {
-      _id: id,
       name,
       weight: breed.weight.imperial,
       height: breed.height.imperial,
       life_span,
       breed_group,
       temperament,
-      img: image.url,
       madeIn: "apiDog",
     };
   });
