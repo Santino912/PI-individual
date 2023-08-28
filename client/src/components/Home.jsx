@@ -23,7 +23,7 @@ const Home = () => {
   const filterTemperament = useSelector((state) => state.filterTemperament);
   const allTemperaments = useSelector((state) => state.allTemperaments);
   const stateBreeds = useSelector((state) =>
-    state.breedArr.filter((dog) =>
+    state?.breedArr?.filter((dog) =>
       filterAll(
         stateFilter.reg,
         dog.name,

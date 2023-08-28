@@ -15,11 +15,11 @@ export const RESET_BREED_DETAIL = "RESET_BREED_DETAIL";
 
 export function allBreeds(setLoading) {
   let dataTemperaments;
-  fetch(`https://dogfinderapi.onrender.com/temperaments`)
+  fetch(`http://localhost:3001/temperaments`)
     .then((res) => res.json())
     .then((data) => (dataTemperaments = data));
   return function (dispatch) {
-    return fetch(`https://dogfinderapi.onrender.com/breeds`)
+    return fetch(`http://localhost:3001/breeds`)
       .then((res) => res.json())
       .then((data) =>
         dispatch({
@@ -32,7 +32,7 @@ export function allBreeds(setLoading) {
 
 export function fetchOneDetail(breedId) {
   return function (dispatch) {
-    return fetch(`https://dogfinderapi.onrender.com/breeds/${breedId}`)
+    return fetch(`http://localhost:3001/breeds/${breedId}`)
       .then((res) => res.json())
       .then((data) => dispatch({ type: FETCH_ONE_BREED, payload: data }));
   };
