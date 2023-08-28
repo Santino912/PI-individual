@@ -1,4 +1,4 @@
-import { breedsGroupsFilter, sortArrBy, verifTemperaments } from "../../utils";
+import { breedsGroupsFilter, sortArrBy } from "../../utils";
 import {
   CHANGE_PAGE,
   FETCH_ALL_BREEDS,

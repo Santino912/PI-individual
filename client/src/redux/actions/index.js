@@ -15,18 +15,19 @@ export const RESET_BREED_DETAIL = "RESET_BREED_DETAIL";
 
 export function allBreeds(setLoading) {
   let dataTemperaments;
-  fetch(`hhttps://dogfinderapi.onrender.com/temperaments`)
+  fetch(`https://dogfinderapi.onrender.com/temperaments`)
     .then((res) => res.json())
     .then((data) => (dataTemperaments = data));
   return function (dispatch) {
     return fetch(`https://dogfinderapi.onrender.com/breeds`)
       .then((res) => res.json())
-      .then((data) =>
-        dispatch({
+      .then((data) => {
+        setLoading(false);
+        return dispatch({
           type: FETCH_ALL_BREEDS,
           payload: { data: data, dataTemperaments },
-        })
-      );
+        });
+      });
   };
 }
 
